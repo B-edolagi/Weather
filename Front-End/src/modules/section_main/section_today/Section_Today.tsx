@@ -12,15 +12,15 @@ function Today() {
   var data = new URLSearchParams();
   data.append("username", "ilya");
   data.append("password", "123");
+  const jsessionId = localStorage.getItem("jsessionid");
 
-  fetch("http://localhost:8080/auth/login", {
-    method: "POST", // Метод запроса (может быть GET, POST, и т.д.)
-    credentials: "include", // Это важно, чтобы разрешить передачу учетных данных (куки)
+  fetch("http://localhost:8080/getCurrentWeather", {
+    method: "GET",
+    credentials: "include",
     headers: {
-      "Content-Type": "application/x-www-form-urlencoded", // Установите необходимый заголовок для вашего контента
-      // Другие заголовки, если необходимо
+      "Content-Type": "application/json",
+      Cookie: `JSESSIONID=${jsessionId}`,
     },
-    body: data,
   })
     .then((response) => {
       if (!response.ok) {
@@ -39,8 +39,7 @@ function Today() {
       const set = data.sys.sunset;
       // Можно выполнить какие-либо операции с температурой здесь, если необходимо
 
-
-setTemperature(temp); // Сохраняем значение температуры в состоянии компонента
+      setTemperature(temp); // Сохраняем значение температуры в состоянии компонента
       setFeel(fls);
       setPressure(prsr);
       setHumidity(hmdt);
@@ -73,7 +72,7 @@ setTemperature(temp); // Сохраняем значение температу�
             <div className="rise_title">
               <h3 id="ChangeColor">Sunrise</h3>
               <p className="rise_time" id="ChangeColor">
-               {sunrise}
+                {sunrise}
               </p>
             </div>
           </div>

@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-
+import Header from "../header/Header";
 import SectionMain from "../section_main/section_main";
 import SectionSecond from "../section_second/section_second";
-import Header from "../header/Header";
 
 interface User {
   username: string;
@@ -14,7 +13,7 @@ function handleLogin() {
   data.append("username", "ilya");
   data.append("password", "123");
 
-  fetch("http://localhost:8080/auth/login", {
+  fetch("http://localhost:8080/login", {
     method: "POST",
     credentials: "include",
     headers: {
@@ -26,7 +25,19 @@ function handleLogin() {
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
-      return response.json();
+      const setCookieHeader = response.headers.get("Set-Cookie");
+
+      if (setCookieHeader) {
+        // Извлекаем jsessionid из куки
+        const jsessionId = setCookieHeader.split(";")[0];
+        const jsessionIdValue = jsessionId.split("=")[1];
+        console.log(jsessionIdValue);
+
+        // Сохраняем jsessionid, например, в состоянии приложения
+        // или в localStorage или sessionStorage для дальнейшего использования
+        localStorage.setItem("jsessionid", jsessionIdValue);
+      }
+      return response.text();
     })
     .then((data) => {
       // Обработайте ответ от сервера
@@ -115,13 +126,8 @@ const LoginScreen: React.FC = () => {
               </div>
               <div className="wrap__input_btn">
                 <button type="submit" className="enter_btn" onClick={ban}>
-                  SIGN IN
+                  LOGIN
                 </button>
-              </div>
-              <div className="wrap__reg">
-                <span>
-                  Don't have an account? <a href="#">Sign Up</a>
-                </span>
               </div>
             </form>
           </div>

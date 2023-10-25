@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 function Forecast() {
+  const jsessionId = localStorage.getItem("jsessionid");
+
   const weekDays = [
     "Sunday",
     "Monday",
@@ -38,7 +40,7 @@ function Forecast() {
     formattedDates1.push(formattedDate);
   }
 
-  const formattedDates: any[] = [];
+  const formattedDates = [];
 
   for (let i = 0; i < 5; i++) {
     const currentDate = new Date();
@@ -59,11 +61,11 @@ function Forecast() {
   const [date5, setDate5] = useState(null);
 
   fetch("http://localhost:8080/getDailyWeather", {
-    method: "GET", // Метод запроса (может быть GET, POST, и т.д.)
-    credentials: "include", // Это важно, чтобы разрешить передачу учетных данных (куки)
+    method: "GET",
+    credentials: "include",
     headers: {
-      "Content-Type": "application/json", // Установите необходимый заголовок для вашего контента
-      // Другие заголовки, если необходимо
+      "Content-Type": "application/json",
+      Cookie: `JSESSIONID=${jsessionId}`,
     },
   })
     .then((response) => {
