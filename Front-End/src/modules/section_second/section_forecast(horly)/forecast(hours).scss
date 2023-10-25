@@ -1,0 +1,64 @@
+.ForecastHours_main {
+    max-width: 870px;
+    width: 100%;
+    border-radius: 40px;
+    background-color: rgb(224, 224, 224);
+    filter: drop-shadow(10px 10px 4px rgba(0, 0, 0, 0.5));
+    display: flex;
+    flex-flow: column;
+    gap: 25px;
+    justify-content: center;
+    align-items: center;
+    padding: 14px 0px;
+    .ForecastHours {
+        font-size: 32px;
+        font-weight: 700;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
+    .ForecastHours_inf {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 14.5px;
+        .ForecastHours_inf_title {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-flow: column;
+            background: white;
+            padding: 28px 23.3px;
+            border-radius: 40px;
+            .ForecastHours_inf_title_time {
+                font-size: 24px;
+                font-weight: 700;
+                font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            }
+            .ForecastHours_inf_title_Co {
+                font-size: 20px;
+                font-weight: 700;
+                font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            }
+            .ForecastHours_inf_title_speed {
+                font-size: 24px;
+                font-weight: 700;
+                font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            }
+        }
+        .ForecastHours_inf_title_night {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-flow: column;
+            background: white;
+            padding: 28px 23.3px;
+            border-radius: 40px;
+            font-size: 24px;
+            font-weight: 700;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+    }
+}
+
+.ForecastHours_main:hover {
+    background-color: rgb(217, 217, 217);
+}

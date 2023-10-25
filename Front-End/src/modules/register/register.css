@@ -1,0 +1,168 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+.container__login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.container__login_wrap {
+    max-width: 390px;
+    width: 100%;
+    max-height: 650px;
+    height: 100%;
+}
+
+.form_main {
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    align-items: center;
+    flex-flow: column;
+    max-height: 500px;
+    height: 100%;
+    padding: 75px 55px 50px;
+    border-radius: 15px;
+    gap: 30px;
+}
+
+.login__form {
+    display: block;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 32px;
+    color: #333333;
+    line-height: 1.2;
+    text-align: center;
+    letter-spacing: 1px;
+    padding-bottom: 20px;
+}
+
+.login__form_img {
+    padding-bottom: 0px;
+}
+
+.wrap__input {
+    border-bottom: 2px solid #adadad;
+    display: flex;
+    flex-flow: column;
+}
+
+.wrap__input1 {
+    border-bottom: 2px solid #adadad;
+    display: flex;
+    width: 278px;
+}
+
+.input {
+    background: none;
+    width: 280px;
+    padding: 15px 0px;
+    border: none;
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    letter-spacing: 1px;
+}
+
+.wrap__input:focus-within {
+    border-bottom: 2px solid #21d4fd;
+    /* Цвет border-bottom при фокусировке на input внутри div */
+}
+
+.wrap__input1:focus-within {
+    border-bottom: 2px solid #21d4fd;
+    /* Цвет border-bottom при фокусировке на input внутри div */
+}
+
+input::placeholder {
+    font-size: 15px;
+    color: #555555;
+    letter-spacing: 1px;
+}
+
+input:focus {
+    outline: none;
+}
+
+.wrap__input_btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 280px;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.enter_btn {
+    max-width: 280px;
+    width: 100%;
+    padding: 15.5px 0px;
+    border-radius: 50px;
+    border: none;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    letter-spacing: 2px;
+    background-size: 200% auto;
+    background-image: linear-gradient(to right, #21d4fd 0%, #b721ff 51%, #21d4fd 100%);
+    transition: 0.5s;
+}
+
+.enter_btn:hover {
+    background-position: right center;
+}
+
+.enter_btn:focus {
+    outline: none;
+}
+
+.enter_btn:active {
+    transform: scale(0.95);
+    transition: 0.1s;
+}
+
+.btn_show {
+    background: none;
+    border: 0px;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.rotate-image {
+    animation: spin 4s linear infinite;
+    /* Здесь "2s" - это продолжительность анимации */
+}
+
+.wrap__reg {
+    padding-top: 30px;
+}
+
+.wrap__reg span {
+    color: rgb(0, 0, 0);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    letter-spacing: 1px;
+}
+
+.wrap__reg span a {
+    text-decoration: none;
+    color: #7c6363;
+    font-size: 17px;
+}
+
+input::placeholder {
+    position: relative;
+    left: 0px;
+}

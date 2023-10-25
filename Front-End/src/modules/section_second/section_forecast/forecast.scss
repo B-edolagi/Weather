@@ -1,0 +1,49 @@
+.Forecast {
+    max-width: 414px;
+    width: 100%;
+    border-radius: 40px;
+    background-color: rgb(224, 224, 224);
+    filter: drop-shadow(10px 10px 4px rgba(0, 0, 0, 0.5));
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 0px;
+    .Forecast_Name {
+        font-size: 32px;
+        font-weight: 700;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
+    .Forecast_inf {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-flow: column;
+        gap: 5px;
+        .Forecast_inf_title {
+            max-width: 370px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            .Forecast_inf_title_p {
+                max-width: 90px;
+                width: 100%;
+                font-size: 24px;
+                font-weight: 700;
+                font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+                text-align: center;
+            }
+            .Forecast_inf_title_day {
+                font-size: 20px;
+                font-weight: 700;
+                font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            }
+        }
+    }
+}
+
+.Forecast:hover {
+    background-color: rgb(217, 217, 217);
+}
