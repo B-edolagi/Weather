@@ -92,17 +92,6 @@ header .header__list .list_switcher .switcher_block {
     padding: 3.6px 0px;
 }
 
-header .header__list .list_switcher .switcher_block button {
-    position: relative;
-    left: 9px;
-    max-width: 29.7px;
-    width: 100%;
-    background-color: black;
-    border: 0px;
-    padding: 14.76px 0px;
-    border-radius: 100px;
-}
-
 header .header__list .list_switcher p {
     max-width: 103px;
     width: 100%;
@@ -115,4 +104,27 @@ header .header__list .list_switcher p {
 input::placeholder {
     position: relative;
     left: 50px;
+}
+
+.switcher_press {
+    max-width: 29.7px;
+    width: 100%;
+    padding: 14.76px 0px;
+    background-color: black;
+    color: white;
+    border-radius: 100px;
+    border: none;
+    cursor: pointer;
+    transition: transform 1s ease;
+    position: relative;
+    left: 5px;
+}
+
+
+/* Стили для перемещенной кнопки */
+
+.switcher_block.moved .switcher_press {
+    transform: translateX(60px);
+    background-color: rgb(0, 0, 0);
+    /* Измените значение, чтобы кнопка двигалась вправо */
 }

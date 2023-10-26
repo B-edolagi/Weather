@@ -1,13 +1,18 @@
+import { useState } from "react";
 import Button from "../../components/Button";
 function Header() {
+  const [isMoved, setIsMoved] = useState(false);
+  const [isLightMode, setIsLightMode] = useState(true);
   const changeBlockColor = () => {
+    setIsMoved(!isMoved);
+    setIsLightMode(!isLightMode);
     const elements = [
       "timeSection",
       "TodaySection",
       "Forecast",
       "ForecastHours",
+      "paragraph",
     ];
-
     elements.forEach((elementId) => {
       const element = document.getElementById(elementId);
       if (element) {
@@ -16,25 +21,32 @@ function Header() {
         const originalTextColor = element.dataset.originalTextColor || "";
         const currentTextColor = element.style.color;
 
-        if (currentColor !== "rgb(68, 68, 68)") {
-          // Save the original colors if they haven't been saved yet
-          if (originalColor === "") {
-            element.dataset.originalColor = currentColor;
+        if (elementId !== "paragraph") {
+          if (currentColor !== "rgb(68, 68, 68)") {
+            // Save the original background color if it hasn't been saved yet
+            if (originalColor === "") {
+              element.dataset.originalColor = currentColor;
+            }
+
+            element.style.backgroundColor = "rgb(68, 68, 68)";
+            element.style.color = "white";
+          } else {
+            // Restore the original background color
+            element.style.backgroundColor = originalColor;
+            element.style.color = originalTextColor;
           }
+        } else {
           if (originalTextColor === "") {
             element.dataset.originalTextColor = currentTextColor;
           }
-
-          element.style.backgroundColor = "rgb(68, 68, 68)";
-          element.style.color = "white";
-        } else {
-          // Restore the original colors
-          element.style.backgroundColor = originalColor;
-          element.style.color = originalTextColor;
+          if (currentTextColor !== "white") {
+            element.style.color = "white";
+          } else {
+            element.style.color = "black";
+          }
         }
       }
     });
-
     const body = document.getElementById("mainBody");
     if (body) {
       const originalBodyColor = body.dataset.originalBodyColor || "";
@@ -58,13 +70,14 @@ function Header() {
     <header>
       <div className="header__list">
         <div className="list_switcher">
-          <div className="switcher_block">
+          <div className={`switcher_block ${isMoved ? "moved" : ""}`}>
             <button
               className="switcher_press"
               onClick={changeBlockColor}
+              id="movingButton"
             ></button>
           </div>
-          <p>Light Mode</p>
+          <p id="paragraph">{isLightMode ? "Light Mode" : "Dark Mode"}</p>
         </div>
         <label htmlFor="search" className="list_search">
           <input
