@@ -8,59 +8,30 @@ interface User {
   password: string;
 }
 
-function handleLogin() {
-  var data = new URLSearchParams();
-  data.append("username", "ilya");
-  data.append("password", "123");
-
-  fetch("http://localhost:8080/login", {
-    method: "POST",
-    credentials: "include",
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
-    },
-    body: data,
-  })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      const setCookieHeader = response.headers.get("Set-Cookie");
-
-      if (setCookieHeader) {
-        // Извлекаем jsessionid из куки
-        const jsessionId = setCookieHeader.split(";")[0];
-        const jsessionIdValue = jsessionId.split("=")[1];
-        console.log(jsessionIdValue);
-
-        // Сохраняем jsessionid, например, в состоянии приложения
-        // или в localStorage или sessionStorage для дальнейшего использования
-        localStorage.setItem("jsessionid", jsessionIdValue);
-      }
-      return response.text();
-    })
-    .then((data) => {
-      // Обработайте ответ от сервера
-      console.log(data);
-    })
-    .catch((error) => {
-      // Обработайте возможные ошибки
-      console.error(error);
-    });
-}
-const ban = handleLogin;
 const LoginScreen: React.FC = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [isCodeVisible, setIsCodeVisible] = useState(false);
+  const [showContent, setShowContent] = useState(true); // Управление видимостью SectionMain
 
   const handleLogin = (event: React.FormEvent) => {
     event.preventDefault();
-
+    // Ваша логика обработки логина здесь
+    // После успешного входа можно сделать блок кода видимым
+    setIsCodeVisible(true);
     // Проверка введенных данных (для примера)
     if (username === "ilya" && password === "123") {
       setLoggedIn(true);
+
+      // Скрываем главную карточку
+      setShowContent(false);
+
+      // По истечении 3 секунд показываем остальной контент
+      setTimeout(() => {
+        setShowContent(true);
+      }, 3000);
     }
   };
 
@@ -73,6 +44,7 @@ const LoginScreen: React.FC = () => {
   const handleToggleShowPassword = () => {
     setShowPassword(!showPassword);
   };
+
   return (
     <div>
       {loggedIn ? (
@@ -125,7 +97,18 @@ const LoginScreen: React.FC = () => {
                 </button>
               </div>
               <div className="wrap__input_btn">
-                <button type="submit" className="enter_btn" onClick={ban}>
+                <button
+                  type="submit"
+                  className="enter_btn"
+                  onClick={(event) => {
+                    event.preventDefault(); // Предотвращаем отправку формы
+
+                    // Задержка в 4 секунды
+                    setTimeout(() => {
+                      handleLogin(event); // Передаем event в функцию handleLogin
+                    }, 3000); // 4000 миллисекунд (4 секунды)
+                  }}
+                >
                   LOGIN
                 </button>
               </div>
