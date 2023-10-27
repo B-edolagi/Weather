@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Header from "../header/Header";
 import SectionMain from "../section_main/section_main";
 import SectionSecond from "../section_second/section_second";
+import Footer from "../footer/footer";
 
 interface User {
   username: string;
@@ -52,6 +53,7 @@ const LoginScreen: React.FC = () => {
           <Header />
           <SectionMain />
           <SectionSecond />
+          <Footer />
         </div>
       ) : (
         <div className="container__login">

@@ -50,7 +50,7 @@ header .header__list .list_search #search {
 }
 
 header .header__list .Current_btn {
-    background-color: #4CBB17;
+    background-color: rgb(82, 140, 125);
     max-width: 292px;
     padding: 18px 0px;
     width: 100%;

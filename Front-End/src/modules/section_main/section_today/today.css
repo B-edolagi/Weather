@@ -31,27 +31,21 @@
 }
 
 .Today_block .Today_block_tmp .tmp_main h2 {
-    background: -webkit-linear-gradient(black, rgba(255, 255, 255, 0));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: rgba(82, 140, 125, 0.467);
     font-size: 80px;
     font-weight: 700;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 .Today_block .Today_block_tmp .tmp_main p {
-    background: -webkit-linear-gradient(black, rgba(255, 255, 255, 0));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: rgba(82, 140, 125, 0.467);
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-size: 32px;
     font-weight: 600;
 }
 
 .Today_block .Today_block_tmp .tmp_main h3 {
-    background: -webkit-linear-gradient(black, rgba(255, 255, 255, 0));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: rgba(82, 140, 125, 0.467);
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-size: 20px;
     font-weight: 600;

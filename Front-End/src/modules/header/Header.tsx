@@ -12,7 +12,9 @@ function Header() {
       "Forecast",
       "ForecastHours",
       "paragraph",
+      "footer__container",
     ];
+
     elements.forEach((elementId) => {
       const element = document.getElementById(elementId);
       if (element) {
@@ -47,6 +49,7 @@ function Header() {
         }
       }
     });
+
     const body = document.getElementById("mainBody");
     if (body) {
       const originalBodyColor = body.dataset.originalBodyColor || "";
