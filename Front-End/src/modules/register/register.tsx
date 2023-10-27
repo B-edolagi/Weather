@@ -32,7 +32,7 @@ const LoginScreen: React.FC = () => {
       // По истечении 3 секунд показываем остальной контент
       setTimeout(() => {
         setShowContent(true);
-      }, 3000);
+      }, 1000);
     }
   };
 
