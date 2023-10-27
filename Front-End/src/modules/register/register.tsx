@@ -9,6 +9,47 @@ interface User {
   password: string;
 }
 
+function handleLogin() {
+  var data = new URLSearchParams();
+  data.append("username", "ilya");
+  data.append("password", "123");
+
+  fetch("http://localhost:8080/login", {
+    method: "POST",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    body: data,
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const setCookieHeader = response.headers.get("Set-Cookie");
+    
+      if (setCookieHeader) {
+        // Извлекаем jsessionid из куки
+        const jsessionId = setCookieHeader.split(";")[0];
+        const jsessionIdValue = jsessionId.split("=")[1];
+        console.log(jsessionIdValue)
+        
+        // Сохраняем jsessionid, например, в состоянии приложения
+        // или в localStorage или sessionStorage для дальнейшего использования
+        localStorage.setItem('jsessionid', jsessionIdValue);
+      }
+      return response.text();
+    })
+    .then((data) => {
+      // Обработайте ответ от сервера
+      console.log(data);
+    })
+    .catch((error) => {
+      // Обработайте возможные ошибки
+      console.error(error);
+    });
+}
+
 const LoginScreen: React.FC = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
