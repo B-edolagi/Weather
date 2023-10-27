@@ -9,7 +9,7 @@ interface User {
   password: string;
 }
 
-function handleLogin() {
+const LoginScreen: React.FC = () => {
   var data = new URLSearchParams();
   data.append("username", "ilya");
   data.append("password", "123");
@@ -27,16 +27,16 @@ function handleLogin() {
         throw new Error("Network response was not ok");
       }
       const setCookieHeader = response.headers.get("Set-Cookie");
-    
+
       if (setCookieHeader) {
         // Извлекаем jsessionid из куки
         const jsessionId = setCookieHeader.split(";")[0];
         const jsessionIdValue = jsessionId.split("=")[1];
-        console.log(jsessionIdValue)
-        
+        console.log(jsessionIdValue);
+
         // Сохраняем jsessionid, например, в состоянии приложения
         // или в localStorage или sessionStorage для дальнейшего использования
-        localStorage.setItem('jsessionid', jsessionIdValue);
+        localStorage.setItem("jsessionid", jsessionIdValue);
       }
       return response.text();
     })
@@ -48,9 +48,6 @@ function handleLogin() {
       // Обработайте возможные ошибки
       console.error(error);
     });
-}
-
-const LoginScreen: React.FC = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
