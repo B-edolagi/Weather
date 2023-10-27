@@ -15,39 +15,48 @@ const LoginScreen: React.FC = () => {
   data.append("password", "123");
 
   fetch("http://localhost:8080/login", {
-    method: "POST",
-    credentials: "include",
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
-    },
-    body: data,
-  })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
+  method: "POST",
+  credentials: "include",
+  headers: {
+    "Content-Type": "application/x-www-form-urlencoded",
+  },
+  body: data,
+})
+  .then((response) => {
+    if (response.status === 302) {
+      // Обработка перенаправления
+      const newUrl = response.headers.get("Location");
+      if (newUrl) {
+        console.log("Перенаправление на:", newUrl);
+        // Выполнить переход по новому URL
+        window.location.href = newUrl;
+      } else {
+        console.error("URL для перенаправления не найден.");
       }
+    } else if (!response.ok) {
+      throw new Error("Network response was not ok");
+    } else {
       const setCookieHeader = response.headers.get("Set-Cookie");
-
       if (setCookieHeader) {
         // Извлекаем jsessionid из куки
         const jsessionId = setCookieHeader.split(";")[0];
         const jsessionIdValue = jsessionId.split("=")[1];
-        console.log(jsessionIdValue);
-
+        console.log("JSESSIONID:", jsessionIdValue);
         // Сохраняем jsessionid, например, в состоянии приложения
         // или в localStorage или sessionStorage для дальнейшего использования
-        localStorage.setItem("jsessionid", jsessionIdValue);
+        localStorage.setItem('jsessionid', jsessionIdValue);
+        return response.text();
       }
-      return response.text();
-    })
-    .then((data) => {
-      // Обработайте ответ от сервера
-      console.log(data);
-    })
-    .catch((error) => {
-      // Обработайте возможные ошибки
-      console.error(error);
-    });
+    }
+  })
+  .then((data) => {
+    // Обработайте ответ от сервера
+    console.log("Ответ от сервера:", data);
+  })
+  .catch((error) => {
+    // Обработайте возможные ошибки
+    console.error(error);
+  });
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
@@ -146,7 +155,7 @@ const LoginScreen: React.FC = () => {
                     // Задержка в 4 секунды
                     setTimeout(() => {
                       handleLogin(event); // Передаем event в функцию handleLogin
-                    }, 3000); // 4000 миллисекунд (4 секунды)
+                    }, 5000); // 4000 миллисекунд (4 секунды)
                   }}
                 >
                   LOGIN
