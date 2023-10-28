@@ -13,6 +13,10 @@ function Header() {
       "ForecastHours",
       "paragraph",
       "footer__container",
+      "h2",
+      "lox",
+      "h22", // Add the ID for the new h2 element
+      "lox22", // Add the ID for the new p element
     ];
 
     elements.forEach((elementId) => {
@@ -23,7 +27,13 @@ function Header() {
         const originalTextColor = element.dataset.originalTextColor || "";
         const currentTextColor = element.style.color;
 
-        if (elementId !== "paragraph") {
+        if (
+          elementId !== "paragraph" &&
+          elementId !== "h2" &&
+          elementId !== "lox" &&
+          elementId !== "h22" &&
+          elementId !== "lox22"
+        ) {
           if (currentColor !== "rgb(68, 68, 68)") {
             // Save the original background color if it hasn't been saved yet
             if (originalColor === "") {
@@ -37,14 +47,27 @@ function Header() {
             element.style.backgroundColor = originalColor;
             element.style.color = originalTextColor;
           }
-        } else {
+        } else if (
+          elementId === "paragraph" ||
+          elementId === "h2" ||
+          elementId === "h22"
+        ) {
           if (originalTextColor === "") {
             element.dataset.originalTextColor = currentTextColor;
           }
           if (currentTextColor !== "white") {
             element.style.color = "white";
           } else {
-            element.style.color = "black";
+            element.style.color = "rgb(82, 64, 64)";
+          }
+        } else if (elementId === "lox" || elementId === "lox22") {
+          if (originalTextColor === "") {
+            element.dataset.originalTextColor = currentTextColor;
+          }
+          if (currentTextColor !== "white") {
+            element.style.color = "white";
+          } else {
+            element.style.color = "rgb(82, 64, 64)";
           }
         }
       }
@@ -68,7 +91,6 @@ function Header() {
       }
     }
   };
-
   return (
     <header>
       <div className="header__list">

@@ -2,6 +2,7 @@ import { BiLogoTelegram } from "react-icons/bi";
 import { SlSocialVkontakte } from "react-icons/sl";
 import { AiOutlineInstagram } from "react-icons/ai";
 import { DiGithubFull } from "react-icons/di";
+import { AiFillGithub } from "react-icons/ai";
 
 function Footer() {
   return (
@@ -17,6 +18,48 @@ function Footer() {
           >
             Write us...
           </a>
+        </div>
+        <div className="footer__container_names">
+          <div className="names_all">
+            <div className="names_all_title">
+              <img
+                src="/src/assets/nikita.jpg"
+                alt="nikita"
+                width="100px"
+                height="100px"
+                id="img"
+              />
+              <div className="inf" id="">
+                <h2 id="h2">Front-End</h2>
+                <p id="lox">Developer</p>
+                <a href="https://github.com/EronMG" target="_blank" id="link">
+                  ZAYTSEV NIKITA <AiFillGithub />
+                </a>
+              </div>
+            </div>
+          </div>
+          <div className="names_all">
+            <div className="names_all_title">
+              <div className="inf">
+                <h2 id="h22">Back-End</h2>
+                <p id="lox22">Developer</p>
+                <a
+                  href="https://github.com/omega1u123"
+                  target="_blank"
+                  id="link"
+                >
+                  <AiFillGithub /> GVARDIAN ILYA
+                </a>
+              </div>
+              <img
+                src="/src/assets/ilya.jpg"
+                alt="ilya"
+                width="100px"
+                height="100px"
+                id="img"
+              />
+            </div>
+          </div>
         </div>
         <div className="footer__container_links">
           <a
