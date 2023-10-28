@@ -14,7 +14,7 @@ function Today() {
   data.append("password", "123");
   const jsessionId = localStorage.getItem("jsessionid");
 
-  fetch("/localhost:8080/getCurrentWeather", {
+  fetch("http://localhost:8080/getCurrentWeather", {
     method: "GET",
     credentials: "include",
     headers: {
