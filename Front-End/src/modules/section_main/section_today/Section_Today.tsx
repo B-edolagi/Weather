@@ -9,42 +9,37 @@ function Today() {
   const [speed, setSpeed] = useState(null);
   const [sunrise, setSunrise] = useState(null);
   const [sunset, setSet] = useState(null);
-  async function fetchWeatherData() {
-    try {
-      const jsessionId = localStorage.getItem("jsessionid");
-      const response = await fetch("http://localhost:8080/getCurrentWeather", {
-        method: "GET",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-          Cookie: `JSESSIONID=${jsessionId}`,
-        },
-      });
+  var data = new URLSearchParams();
+  data.append("username", "ilya");
+  data.append("password", "123");
+  const jsessionId = localStorage.getItem("jsessionid");
 
+  fetch("http://localhost:8080/getCurrentWeather", {
+    method: "GET",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+      Cookie: `JSESSIONID=${jsessionId}`,
+    },
+  })
+    .then((response) => {
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
+      return response.json(); // Обработка ответа
+    })
+    .then((data) => {
+      const temp = data.main.temp;
+      const fls = data.main.feels_like;
+      const prsr = data.main.pressure;
+      const hmdt = data.main.humidity;
+      const deg = data.wind.deg;
+      const spd = data.wind.speed;
+      const rise = data.sys.sunrise;
+      const set = data.sys.sunset;
+      // Можно выполнить какие-либо операции с температурой здесь, если необходимо
 
-      const responseData = await response.json();
-      // Проверяем, содержит ли ответ форму авторизации
-      if (responseData.containsLoginForm) {
-        // Возвращаем специальный флаг, чтобы обработать повторную авторизацию
-        return { requiresLogin: true };
-      }
-
-      // Обработка данных о погоде
-      const temp = responseData.main.temp;
-      const fls = responseData.main.feels_like;
-      const prsr = responseData.main.pressure;
-      const hmdt = responseData.main.humidity;
-      const deg = responseData.wind.deg;
-      const spd = responseData.wind.speed;
-      const rise = responseData.sys.sunrise;
-      const set = responseData.sys.sunset;
-
-      // Выполните какие-либо операции с данными о погоде
-
-      setTemperature(temp);
+      setTemperature(temp); // Сохраняем значение температуры в состоянии компонента
       setFeel(fls);
       setPressure(prsr);
       setHumidity(hmdt);
@@ -52,15 +47,10 @@ function Today() {
       setSpeed(spd);
       setSunrise(rise);
       setSet(set);
-
-      return { requiresLogin: false };
-    } catch (error) {
+    })
+    .catch((error) => {
       // Обработка ошибок
-      console.error(error);
-      return { requiresLogin: false };
-    }
-  }
-
+    });
   return (
     <div className="Today_block" id="TodaySection">
       <div className="Today_block_tmp">
