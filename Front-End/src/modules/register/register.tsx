@@ -10,15 +10,15 @@ interface User {
 }
 
 const LoginScreen: React.FC = () => {
-  var data = new URLSearchParams();
-  data.append("username", "ilya");
+  /*var data = new URLSearchParams();
+  data.append("username", "lol");
   data.append("password", "123");
 
   fetch("http://localhost:8080/login", {
     method: "POST",
     credentials: "include",
     headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
+      "Content-Type": "application/json",
     },
     body: data,
   })
@@ -56,7 +56,7 @@ const LoginScreen: React.FC = () => {
     .catch((error) => {
       // Обработайте возможные ошибки
       console.error(error);
-    });
+    });*/
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
