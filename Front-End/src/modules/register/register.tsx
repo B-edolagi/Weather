@@ -10,6 +10,21 @@ interface User {
 }
 
 const LoginScreen: React.FC = () => {
+  const requestOptions = {
+    method: "POST", // Метод запроса, может быть GET, POST и другие
+    headers: new Headers({ "Content-Type": "application/json" }), // Заголовки запроса
+    body: JSON.stringify({ username: "lol", password: "123" }), // Тело запроса, если это POST-запрос
+  };
+
+  fetch("http://localhost:8080/auth", requestOptions)
+    .then((response) => response.json()) // Обработка ответа, парсим JSON, если сервер отправляет JSON
+    .then((data) => {
+      // Ваш код для обработки данных
+    })
+    .catch((error) => {
+      // Обработка ошибок
+      console.error("Произошла ошибка:", error);
+    });
   /*var data = new URLSearchParams();
   data.append("username", "lol");
   data.append("password", "123");
