@@ -1,6 +1,15 @@
 import React, { useState, useEffect } from "react";
+import { getToken } from "../../register/token"; // Путь к файлу api.ts
 
 function Today() {
+  const [token, setToken] = useState<string | null>("");
+  useEffect(() => {
+    getToken().then((token) => {
+      if (token) {
+        setToken(token);
+      }
+    });
+  }, []);
   const [temperature, setTemperature] = useState(null);
   const [feel, setFeel] = useState(null);
   const [pressure, setPressure] = useState(null);
@@ -14,13 +23,12 @@ function Today() {
   data.append("password", "123");
   const jsessionId = localStorage.getItem("jsessionid");
 
-  
-  /*fetch("http://localhost:8080/getCurrentWeather", {
+  fetch("http://localhost:8080/getCurrentWeather", {
     method: "GET",
     credentials: "include",
     headers: {
       "Content-Type": "application/json",
-      Cookie: `JSESSIONID=${jsessionId}`,
+      Authorization: `Bearer ${token}`, // Используем сохраненный токен
     },
   })
     .then((response) => {
@@ -51,7 +59,7 @@ function Today() {
     })
     .catch((error) => {
       // Обработка ошибок
-    });*/
+    });
   return (
     <div className="Today_block" id="TodaySection">
       <div className="Today_block_tmp">

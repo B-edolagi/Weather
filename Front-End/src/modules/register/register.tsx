@@ -11,67 +11,29 @@ interface User {
 
 const LoginScreen: React.FC = () => {
   const requestOptions = {
-    method: "POST", // Метод запроса, может быть GET, POST и другие
-    headers: new Headers({ "Content-Type": "application/json" }), // Заголовки запроса
-    body: JSON.stringify({ username: "lol", password: "123" }), // Тело запроса, если это POST-запрос
+    method: "POST",
+    headers: new Headers({ "Content-Type": "application/json" }),
+    body: JSON.stringify({ username: "lol", password: "123" }),
   };
 
-  fetch("http://localhost:8080/auth", requestOptions)
-    .then((response) => response.json()) // Обработка ответа, парсим JSON, если сервер отправляет JSON
-    .then((data) => {
-      // Ваш код для обработки данных
-    })
-    .catch((error) => {
-      // Обработка ошибок
-      console.error("Произошла ошибка:", error);
-    });
-  /*var data = new URLSearchParams();
-  data.append("username", "lol");
-  data.append("password", "123");
-
-  fetch("http://localhost:8080/login", {
-    method: "POST",
-    credentials: "include",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: data,
-  })
-    .then((response) => {
-      if (response.status === 302) {
-        // Обработка перенаправления
-        const newUrl = response.headers.get("Location");
-        if (newUrl) {
-          console.log("Перенаправление на:", newUrl);
-          // Выполнить переход по новому URL
-          window.location.href = newUrl;
-        } else {
-          console.error("URL для перенаправления не найден.");
-        }
-      } else if (!response.ok) {
-        throw new Error("Network response was not ok");
-      } else {
-        const setCookieHeader = response.headers.get("Set-Cookie");
-        if (setCookieHeader) {
-          // Извлекаем jsessionid из куки
-          const jsessionId = setCookieHeader.split(";")[0];
-          const jsessionIdValue = jsessionId.split("=")[1];
-          console.log("JSESSIONID:", jsessionIdValue);
-          // Сохраняем jsessionid, например, в состоянии приложения
-          // или в localStorage или sessionStorage для дальнейшего использования
-          localStorage.setItem("jsessionid", jsessionIdValue);
-          return response.text();
-        }
-      }
-    })
-    .then((data) => {
-      // Обработайте ответ от сервера
-      console.log("Ответ от сервера:", data);
-    })
-    .catch((error) => {
-      // Обработайте возможные ошибки
-      console.error(error);
-    });*/
+  // getToken.js
+  // const getToken = () => {
+  //   return fetch("http://localhost:8080/auth", requestOptions)
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       if (data.token) {
+  //         // Если в ответе есть поле "token", возвращаем токен
+  //         return data.token;
+  //       } else {
+  //         console.error("Токен не найден в ответе.");
+  //         return null;
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.error("Произошла ошибка:", error);
+  //       return null;
+  //     });
+  // };
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
