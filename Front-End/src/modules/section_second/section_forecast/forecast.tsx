@@ -58,7 +58,8 @@ function Forecast() {
     const month = String(currentDate.getMonth() + 1).padStart(2, "0");
     const day = String(currentDate.getDate()).padStart(2, "0");
 
-    const formattedDate = `${year}-${month}-${day}`;
+    const formattedDate = `${year}-${month}-${day}`
+    
     formattedDates.push(formattedDate);
   }
 
@@ -68,7 +69,7 @@ function Forecast() {
   const [date4, setDate4] = useState(null);
   const [date5, setDate5] = useState(null);
 
-  fetch("http://localhost:8080/getCurrentWeather", {
+  fetch("http://localhost:8080/getDailyWeather", {
     method: "GET",
     credentials: "include",
     headers: {
@@ -84,7 +85,7 @@ function Forecast() {
     })
     .then((formattedDates) => {
       const day0 = formattedDates[0].main.temp;
-      const day1 = formattedDates[1].main.temp;
+      const day1 = formattedDates[1].dt;
       const day2 = formattedDates[2].main.temp;
       const day3 = formattedDates[3].main.temp;
       const day4 = formattedDates[4].main.temp;
@@ -97,7 +98,9 @@ function Forecast() {
     .catch((error) => {
       // Обработка ошибок
     });
-
+    console.log(date1);
+    console.log(date2);
+    console.log(date3);
   return (
     <div className="Forecast" id="Forecast">
       <h2 className="Forecast_Name" id="ChangeColor">
@@ -112,10 +115,10 @@ function Forecast() {
             height="60px"
           />
           <p className="Forecast_inf_title_p" id="ChangeColor">
-            {date1}
+          {date1 !== null ? date1 : 'Loading...'}
           </p>
           <p className="Forecast_inf_title_day" id="ChangeColor">
-            {formattedDates1[0]}
+            {formattedDates1[1]}
           </p>
         </div>
         <div className="Forecast_inf_title">
