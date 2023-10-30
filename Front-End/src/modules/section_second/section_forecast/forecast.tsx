@@ -3,13 +3,7 @@ import { getToken } from "../../register/token"; // Путь к файлу api.t
 function Forecast() {
   const jsessionId = localStorage.getItem("jsessionid");
   const [token, setToken] = useState<string | null>("");
-  useEffect(() => {
-    getToken().then((token) => {
-      if (token) {
-        setToken(token);
-      }
-    });
-  }, []);
+
   const weekDays = [
     "Sunday",
     "Monday",
@@ -70,6 +64,11 @@ function Forecast() {
   const [date5, setDate5] = useState(null);
 
   useEffect(() => {
+    getToken().then((token) => {
+      if (token) {
+        setToken(token);
+      }
+    });
     fetch("http://localhost:8080/getDailyWeather", {
       method: "GET",
       credentials: "include",
