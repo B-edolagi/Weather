@@ -78,7 +78,7 @@ function Forecast() {
               credentials: "include",
               headers: {
                 "Content-Type": "application/json",
-                Authorization: `Bearer ${fetchedToken}`,
+                Authorization: `Bearer ${token}`,
               },
             }
           );
