@@ -58,8 +58,8 @@ function Forecast() {
     const month = String(currentDate.getMonth() + 1).padStart(2, "0");
     const day = String(currentDate.getDate()).padStart(2, "0");
 
-    const formattedDate = `${year}-${month}-${day}`
-    
+    const formattedDate = `${year}-${month}-${day}`;
+
     formattedDates.push(formattedDate);
   }
 
@@ -69,38 +69,37 @@ function Forecast() {
   const [date4, setDate4] = useState(null);
   const [date5, setDate5] = useState(null);
 
-  fetch("http://localhost:8080/getDailyWeather", {
-    method: "GET",
-    credentials: "include",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`, // Используем сохраненный токен
-    },
-  })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      return response.json(); // Обработка ответа
+  useEffect(() => {
+    fetch("http://localhost:8080/getDailyWeather", {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`, // Используем сохраненный токен
+      },
     })
-    .then((formattedDates) => {
-      const day0 = formattedDates[0].main.temp;
-      const day1 = formattedDates[1].dt;
-      const day2 = formattedDates[2].main.temp;
-      const day3 = formattedDates[3].main.temp;
-      const day4 = formattedDates[4].main.temp;
-      setDate1(day0);
-      setDate2(day1);
-      setDate3(day2);
-      setDate4(day3);
-      setDate5(day4);
-    })
-    .catch((error) => {
-      // Обработка ошибок
-    });
-    console.log(date1);
-    console.log(date2);
-    console.log(date3);
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json(); // Обработка ответа
+      })
+      .then((formattedDates) => {
+        const day0 = formattedDates[0].main.temp;
+        const day1 = formattedDates[1].main.temp;
+        const day2 = formattedDates[2].main.temp;
+        const day3 = formattedDates[3].main.temp;
+        const day4 = formattedDates[4].main.temp;
+        setDate1(day0);
+        setDate2(day1);
+        setDate3(day2);
+        setDate4(day3);
+        setDate5(day4);
+      })
+      .catch((error) => {
+        // Обработка ошибок
+      });
+  });
   return (
     <div className="Forecast" id="Forecast">
       <h2 className="Forecast_Name" id="ChangeColor">
@@ -115,7 +114,7 @@ function Forecast() {
             height="60px"
           />
           <p className="Forecast_inf_title_p" id="ChangeColor">
-          {date1 !== null ? date1 : 'Loading...'}
+            {date1 !== null ? date1 : "Loading..."}
           </p>
           <p className="Forecast_inf_title_day" id="ChangeColor">
             {formattedDates1[1]}
