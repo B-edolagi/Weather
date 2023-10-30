@@ -1,7 +1,15 @@
 import React, { useState, useEffect } from "react";
+import { getToken } from "../../register/token"; // Путь к файлу api.ts
 function Forecast() {
   const jsessionId = localStorage.getItem("jsessionid");
-
+  const [token, setToken] = useState<string | null>("");
+  useEffect(() => {
+    getToken().then((token) => {
+      if (token) {
+        setToken(token);
+      }
+    });
+  }, []);
   const weekDays = [
     "Sunday",
     "Monday",
@@ -60,12 +68,12 @@ function Forecast() {
   const [date4, setDate4] = useState(null);
   const [date5, setDate5] = useState(null);
 
-  fetch("http://localhost:8080/getDailyWeather", {
+  fetch("http://localhost:8080/getCurrentWeather", {
     method: "GET",
     credentials: "include",
     headers: {
       "Content-Type": "application/json",
-      Cookie: `JSESSIONID=${jsessionId}`,
+      Authorization: `Bearer ${token}`, // Используем сохраненный токен
     },
   })
     .then((response) => {
