@@ -64,41 +64,49 @@ function Forecast() {
   const [date5, setDate5] = useState(null);
 
   useEffect(() => {
-    getToken().then((token) => {
-      if (token) {
-        setToken(token);
-      }
-    });
-    fetch("http://localhost:8080/getDailyWeather", {
-      method: "GET",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`, // Используем сохраненный токен
-      },
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
+    const fetchData = async () => {
+      try {
+        const fetchedToken = await getToken();
+        if (fetchedToken) {
+          setToken(fetchedToken);
+
+          // Теперь, когда у нас есть токен, можем выполнить запрос на сервер
+          const response = await fetch(
+            "http://localhost:8080/getDailyWeather",
+            {
+              method: "GET",
+              credentials: "include",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${fetchedToken}`,
+              },
+            }
+          );
+
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+
+          const formattedDates = await response.json();
+          const day0 = formattedDates[0].main.temp;
+          const day1 = formattedDates[1].main.temp;
+          const day2 = formattedDates[2].main.temp;
+          const day3 = formattedDates[3].main.temp;
+          const day4 = formattedDates[4].main.temp;
+          setDate1(day0);
+          setDate2(day1);
+          setDate3(day2);
+          setDate4(day3);
+          setDate5(day4);
         }
-        return response.json(); // Обработка ответа
-      })
-      .then((formattedDates) => {
-        const day0 = formattedDates[0].main.temp;
-        const day1 = formattedDates[1].main.temp;
-        const day2 = formattedDates[2].main.temp;
-        const day3 = formattedDates[3].main.temp;
-        const day4 = formattedDates[4].main.temp;
-        setDate1(day0);
-        setDate2(day1);
-        setDate3(day2);
-        setDate4(day3);
-        setDate5(day4);
-      })
-      .catch((error) => {
+      } catch (error) {
         // Обработка ошибок
-      });
-  });
+      }
+    };
+
+    fetchData();
+  }, [jsessionId]);
+
   return (
     <div className="Forecast" id="Forecast">
       <h2 className="Forecast_Name" id="ChangeColor">
