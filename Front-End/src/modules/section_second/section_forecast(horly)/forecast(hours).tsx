@@ -18,7 +18,7 @@ function ForecastHours() {
 
           // Теперь, когда у нас есть токен, можем выполнить запрос на сервер
           const response = await fetch(
-            "http://localhost:8080/getDailyWeather",
+            "http://localhost:8080/getHourlyWeather",
             {
               method: "GET",
               credentials: "include",
