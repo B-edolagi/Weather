@@ -1,4 +1,58 @@
+import { useEffect, useState } from "react";
+import { getToken } from "../../register/token";
+
 function ForecastHours() {
+  const jsessionId = localStorage.getItem("jsessionid");
+  const [token, setToken] = useState<string | null>("");
+  const [date1, setDate1] = useState(null);
+  const [date2, setDate2] = useState(null);
+  const [date3, setDate3] = useState(null);
+  const [date4, setDate4] = useState(null);
+  const [date5, setDate5] = useState(null);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const fetchedToken = await getToken();
+        if (fetchedToken) {
+          setToken(fetchedToken);
+
+          // Теперь, когда у нас есть токен, можем выполнить запрос на сервер
+          const response = await fetch(
+            "http://localhost:8080/getDailyWeather",
+            {
+              method: "GET",
+              credentials: "include",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${fetchedToken}`,
+              },
+            }
+          );
+
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+
+          const formattedDates = await response.json();
+          const day0 = formattedDates["1"].main.temp;
+          const day1 = formattedDates["2"].main.temp;
+          const day2 = formattedDates["3"].main.temp;
+          const day3 = formattedDates["4"].main.temp;
+          const day4 = formattedDates["5"].main.temp;
+          setDate1(day0);
+          setDate2(day1);
+          setDate3(day2);
+          setDate4(day3);
+          setDate5(day4);
+        }
+      } catch (error) {
+        // Обработка ошибок
+      }
+    };
+
+    fetchData();
+  }, [jsessionId]);
+
   return (
     <div className="ForecastHours_main" id="ForecastHours">
       <h2 className="ForecastHours" id="ChangeColor">
@@ -16,7 +70,7 @@ function ForecastHours() {
             height="80px"
           />
           <p className="ForecastHours_inf_title_Co" id="ChangeColor">
-            26°C
+            {date1}
           </p>
           <img
             src="./src/assets/navigation1.png"
@@ -39,7 +93,7 @@ function ForecastHours() {
             height="80px"
           />
           <p className="ForecastHours_inf_title_Co" id="ChangeColor">
-            27°C
+            {date2}
           </p>
           <img
             src="./src/assets/navigation1.png"
@@ -62,7 +116,7 @@ function ForecastHours() {
             height="80px"
           />
           <p className="ForecastHours_inf_title_Co" id="ChangeColor">
-            27°C
+            {date3}
           </p>
           <img
             src="./src/assets/navigation1.png"
@@ -85,7 +139,7 @@ function ForecastHours() {
             height="80px"
           />
           <p className="ForecastHours_inf_title_Co" id="ChangeColor">
-            25°C
+            {date4}
           </p>
           <img
             src="./src/assets/navigation1.png"
@@ -108,7 +162,7 @@ function ForecastHours() {
             height="80px"
           />
           <p className="ForecastHours_inf_title_Co" id="ChangeColor">
-            22°C
+            {date5}
           </p>
           <img
             src="./src/assets/navigation1.png"

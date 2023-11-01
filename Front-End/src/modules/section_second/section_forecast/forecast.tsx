@@ -88,11 +88,11 @@ function Forecast() {
           }
 
           const formattedDates = await response.json();
-          const day0 = formattedDates[0].main.temp;
-          const day1 = formattedDates[1].main.temp;
-          const day2 = formattedDates[2].main.temp;
-          const day3 = formattedDates[3].main.temp;
-          const day4 = formattedDates[4].main.temp;
+          const day0 = formattedDates["1"].main.temp;
+          const day1 = formattedDates["2"].main.temp;
+          const day2 = formattedDates["3"].main.temp;
+          const day3 = formattedDates["4"].main.temp;
+          const day4 = formattedDates["5"].main.temp;
           setDate1(day0);
           setDate2(day1);
           setDate3(day2);
