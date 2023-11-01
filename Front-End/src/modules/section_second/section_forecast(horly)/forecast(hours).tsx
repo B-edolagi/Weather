@@ -95,7 +95,7 @@ function ForecastHours() {
           setToken(fetchedToken);
 
           const response = await fetch(
-            "http://localhost:8080/getDailyWeather",
+            "http://localhost:8080/getHourlyWeather",
             {
               method: "GET",
               credentials: "include",
