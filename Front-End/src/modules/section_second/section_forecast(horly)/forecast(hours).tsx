@@ -14,6 +14,11 @@ function ForecastHours() {
   const [w18, setW18] = useState<string | undefined>("");
   const [w21, setW21] = useState<string | undefined>("");
   const [w00, setW00] = useState<string | undefined>("");
+  const [speed_1, setSpeed_1] = useState(null);
+  const [speed_2, setSpeed_2] = useState(null);
+  const [speed_3, setSpeed_3] = useState(null);
+  const [speed_4, setSpeed_4] = useState(null);
+  const [speed_5, setSpeed_5] = useState(null);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -49,11 +54,21 @@ function ForecastHours() {
           const W18 = data["3"].weather[0].main;
           const W21 = data["4"].weather[0].main;
           const W00 = data["5"].weather[0].main;
+          const Speed1 = data["1"].wind.main;
+          const Speed2 = data["2"].wind.main;
+          const Speed3 = data["3"].wind.main;
+          const Speed4 = data["4"].wind.main;
+          const Speed5 = data["5"].wind.main;
           setDate1(day0);
           setDate2(day1);
           setDate3(day2);
           setDate4(day3);
           setDate5(day4);
+          setSpeed_1(Speed1);
+          setSpeed_2(Speed2);
+          setSpeed_3(Speed3);
+          setSpeed_4(Speed4);
+          setSpeed_5(Speed5);
           setW12("./src/assets/" + W12 + ".png");
           setW15("./src/assets/" + W15 + ".png");
           setW18("./src/assets/" + W18 + ".png");
@@ -89,7 +104,7 @@ function ForecastHours() {
             height="55px"
           />
           <p className="ForecastHours_inf_title_speed" id="ChangeColor">
-            3km/h
+            {speed_1}
           </p>
         </div>
         <div className="ForecastHours_inf_title">
@@ -107,7 +122,7 @@ function ForecastHours() {
             height="55px"
           />
           <p className="ForecastHours_inf_title_speed" id="ChangeColor">
-            2km/h
+            {speed_2}
           </p>
         </div>
         <div className="ForecastHours_inf_title">
@@ -125,7 +140,7 @@ function ForecastHours() {
             height="55px"
           />
           <p className="ForecastHours_inf_title_speed" id="ChangeColor">
-            2km/h
+            {speed_3}
           </p>
         </div>
         <div className="ForecastHours_inf_title_night">
@@ -143,7 +158,7 @@ function ForecastHours() {
             height="55px"
           />
           <p className="ForecastHours_inf_title_speed" id="ChangeColor">
-            3km/h
+            {speed_4}
           </p>
         </div>
         <div className="ForecastHours_inf_title_night">
@@ -161,7 +176,7 @@ function ForecastHours() {
             height="55px"
           />
           <p className="ForecastHours_inf_title_speed" id="ChangeColor">
-            3km/h
+            {speed_5}
           </p>
         </div>
       </div>
