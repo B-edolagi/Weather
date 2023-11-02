@@ -3,31 +3,6 @@ import { getToken } from "../../register/token";
 
 function ForecastHours() {
   const jsessionId = localStorage.getItem("jsessionid");
-  const data = {
-    dt: "2023-11-02T15:00:00",
-    main: {
-      temp: 6,
-      feels_like: 4,
-      pressure: 1010,
-      // Другие параметры
-    },
-    weather: [
-      {
-        id: 800,
-        main: "Clear",
-        description: "clear sky",
-        // Другие параметры
-      }
-    ]
-  };
-  type WeatherIcons = {
-    [key: string]: string;
-  };
-  const weatherIcons: WeatherIcons = {
-    "Clear1": "url-to-clear-sky-image.jpg",
-    "Clear": "./src/assets/Clear.png",
-    // Add more mappings for other weather descriptions as needed
-  };
   const [token, setToken] = useState<string | null>("");
   const [date1, setDate1] = useState(null);
   const [date2, setDate2] = useState(null);
@@ -35,7 +10,7 @@ function ForecastHours() {
   const [date4, setDate4] = useState(null);
   const [date5, setDate5] = useState(null);
   const [w12, setW12] = useState<string | undefined>("");
-  const [w15, setW15] = useState(null);
+  const [w15, setW15] = useState<string | undefined>("");
   const [w18, setW18] = useState(null);
   const [w21, setW21] = useState(null);
   const [w00, setW00] = useState(null);
@@ -63,23 +38,23 @@ function ForecastHours() {
             throw new Error("Network response was not ok");
           }
 
-          const formattedDates = await response.json();
-          const day0 = formattedDates["1"].main.temp;
-          const day1 = formattedDates["2"].main.temp;
-          const day2 = formattedDates["3"].main.temp;
-          const day3 = formattedDates["4"].main.temp;
-          const day4 = formattedDates["5"].main.temp;
-          const weatherMain = formattedDates["1"].weather[0].main;
-          const W15 = formattedDates["2"].weather[0].description;
-          const W18 = formattedDates["3"].weather[1].description;
-          const W21 = formattedDates["4"].weather[3].description;
-          const W00 = formattedDates["5"].weather.description;
+          const data = await response.json();
+          const day0 = data["1"].main.temp;
+          const day1 = data["2"].main.temp;
+          const day2 = data["3"].main.temp;
+          const day3 = data["4"].main.temp;
+          const day4 = data["5"].main.temp;
+          const W12 = data.weather[0].main;
+          const W15 = data["2"].weather[0].description;
+          const W18 = data["3"].weather[0].description;
+          const W21 = data["4"].weather[0].description;
+          const W00 = data["5"].weather[0].description;
           setDate1(day0);
           setDate2(day1);
           setDate3(day2);
           setDate4(day3);
           setDate5(day4);
-          setW12(weatherMain);
+          setW12(W12 + ".png");
           setW15(W15);
           setW18(W18);
           setW21(W21);
@@ -93,8 +68,7 @@ function ForecastHours() {
     fetchData();
   }, [jsessionId]);
 
-
-return (
+  return (
     <div className="ForecastHours_main" id="ForecastHours">
       <h2 className="ForecastHours" id="ChangeColor">
         Hourly Forecast:
@@ -104,14 +78,9 @@ return (
           <p className="ForecastHours_inf_title_time" id="ChangeColor">
             12:00
           </p>
-          <img
-            src={w12}
-            alt="ph1"
-            width="80px"
-            height="80px"
-          />
+          <img src={w12} alt="ph1" width="80px" height="80px" />
           <p className="ForecastHours_inf_title_Co" id="ChangeColor">
-           {date1}
+            {date1}
           </p>
           <img
             src="./src/assets/navigation1.png"
@@ -127,14 +96,9 @@ return (
           <p className="ForecastHours_inf_title_time" id="ChangeColor">
             15:00
           </p>
-          <img
-            src="./src/assets/clear3.png"
-            alt="ph3"
-            width="80px"
-            height="80px"
-          />
+          <img src={w15} alt="ph3" width="80px" height="80px" />
           <p className="ForecastHours_inf_title_Co" id="ChangeColor">
-          {date2}
+            {date2}
           </p>
           <img
             src="./src/assets/navigation1.png"
@@ -157,7 +121,7 @@ return (
             height="80px"
           />
           <p className="ForecastHours_inf_title_Co" id="ChangeColor">
-          {date3}
+            {date3}
           </p>
           <img
             src="./src/assets/navigation1.png"
@@ -180,7 +144,7 @@ return (
             height="80px"
           />
           <p className="ForecastHours_inf_title_Co" id="ChangeColor">
-          {date4}
+            {date4}
           </p>
           <img
             src="./src/assets/navigation1.png"
@@ -203,7 +167,7 @@ return (
             height="80px"
           />
           <p className="ForecastHours_inf_title_Co" id="ChangeColor">
-          {date5}
+            {date5}
           </p>
           <img
             src="./src/assets/navigation1.png"
