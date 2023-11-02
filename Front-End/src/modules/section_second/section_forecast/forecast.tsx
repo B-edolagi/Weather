@@ -62,7 +62,11 @@ function Forecast() {
   const [date3, setDate3] = useState(null);
   const [date4, setDate4] = useState(null);
   const [date5, setDate5] = useState(null);
-
+  const [w12, setW12] = useState<string | undefined>("");
+  const [w15, setW15] = useState<string | undefined>("");
+  const [w18, setW18] = useState<string | undefined>("");
+  const [w21, setW21] = useState<string | undefined>("");
+  const [w00, setW00] = useState<string | undefined>("");
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -93,11 +97,21 @@ function Forecast() {
           const day2 = formattedDates["3"].main.temp;
           const day3 = formattedDates["4"].main.temp;
           const day4 = formattedDates["5"].main.temp;
+          const W12 = formattedDates["1"].weather[0].main;
+          const W15 = formattedDates["2"].weather[0].main;
+          const W18 = formattedDates["3"].weather[0].main;
+          const W21 = formattedDates["4"].weather[0].main;
+          const W00 = formattedDates["5"].weather[0].main;
           setDate1(day0);
           setDate2(day1);
           setDate3(day2);
           setDate4(day3);
           setDate5(day4);
+          setW12("./src/assets/" + W12 + ".png");
+          setW15("./src/assets/" + W15 + ".png");
+          setW18("./src/assets/" + W18 + ".png");
+          setW21("./src/assets/" + W21 + ".png");
+          setW00("./src/assets/" + W00 + ".png");
         }
       } catch (error) {
         // Обработка ошибок
@@ -114,12 +128,7 @@ function Forecast() {
       </h2>
       <div className="Forecast_inf">
         <div className="Forecast_inf_title">
-          <img
-            src="./src/assets/clouds2.png"
-            alt="photo1"
-            width="60px"
-            height="60px"
-          />
+          <img src={w12} alt="photo1" width="60px" height="60px" />
           <p className="Forecast_inf_title_p" id="ChangeColor">
             {date1 !== null ? date1 : "Loading..."}
           </p>
@@ -128,12 +137,7 @@ function Forecast() {
           </p>
         </div>
         <div className="Forecast_inf_title">
-          <img
-            src="./src/assets/clear3.png"
-            alt="photo2"
-            width="60px"
-            height="60px"
-          />
+          <img src={w15} alt="photo2" width="60px" height="60px" />
           <p className="Forecast_inf_title_p" id="ChangeColor">
             {date2}
           </p>
@@ -142,12 +146,7 @@ function Forecast() {
           </p>
         </div>
         <div className="Forecast_inf_title">
-          <img
-            src="./src/assets/clouds2.png"
-            alt="photo3"
-            width="60px"
-            height="60px"
-          />
+          <img src={w18} alt="photo3" width="60px" height="60px" />
           <p className="Forecast_inf_title_p" id="ChangeColor">
             {date3}
           </p>
@@ -156,12 +155,7 @@ function Forecast() {
           </p>
         </div>
         <div className="Forecast_inf_title">
-          <img
-            src="./src/assets/rain.png"
-            alt="photo4"
-            width="60px"
-            height="60px"
-          />
+          <img src={w21} alt="photo4" width="60px" height="60px" />
           <p className="Forecast_inf_title_p" id="ChangeColor">
             {date4}
           </p>
@@ -170,12 +164,7 @@ function Forecast() {
           </p>
         </div>
         <div className="Forecast_inf_title">
-          <img
-            src="./src/assets/rain.png"
-            alt="photo5"
-            width="60px"
-            height="60px"
-          />
+          <img src={w00} alt="photo5" width="60px" height="60px" />
           <p className="Forecast_inf_title_p" id="ChangeColor">
             {date5}
           </p>
