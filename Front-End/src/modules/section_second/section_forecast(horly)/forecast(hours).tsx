@@ -45,10 +45,10 @@ function ForecastHours() {
           const day3 = data["4"].main.temp;
           const day4 = data["5"].main.temp;
           const W12 = data["1"].weather[0].main;
-          const W15 = data["2"].weather[0].description;
-          const W18 = data["3"].weather[0].description;
-          const W21 = data["4"].weather[0].description;
-          const W00 = data["5"].weather[0].description;
+          const W15 = data["2"].weather[0].main;
+          const W18 = data["3"].weather[0].main;
+          const W21 = data["4"].weather[0].main;
+          const W00 = data["5"].weather[0].main;
           setDate1(day0);
           setDate2(day1);
           setDate3(day2);
