@@ -44,7 +44,7 @@ function ForecastHours() {
           const day2 = data["3"].main.temp;
           const day3 = data["4"].main.temp;
           const day4 = data["5"].main.temp;
-          const W12 = data.weather[0].main;
+          const W12 = data["1"].weather[0].main;
           const W15 = data["2"].weather[0].description;
           const W18 = data["3"].weather[0].description;
           const W21 = data["4"].weather[0].description;
@@ -54,7 +54,7 @@ function ForecastHours() {
           setDate3(day2);
           setDate4(day3);
           setDate5(day4);
-          setW12(W12 + ".png");
+          setW12("./src/assets/" + W12 + ".png");
           setW15(W15);
           setW18(W18);
           setW21(W21);
