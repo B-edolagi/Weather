@@ -107,7 +107,7 @@ function Forecast() {
           setDate3(day2);
           setDate4(day3);
           setDate5(day4);
-          setW12("./src/assets/" + W12 + ".png");
+          setW12(`./src/assets/${W12}.png`);
           setW15("./src/assets/" + W15 + ".png");
           setW18("./src/assets/" + W18 + ".png");
           setW21("./src/assets/" + W21 + ".png");
