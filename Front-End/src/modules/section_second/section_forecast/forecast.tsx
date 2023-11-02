@@ -124,7 +124,7 @@ function Forecast() {
             {date1 !== null ? date1 : "Loading..."}
           </p>
           <p className="Forecast_inf_title_day" id="ChangeColor">
-            {formattedDates1[1]}
+            {formattedDates1[0]}
           </p>
         </div>
         <div className="Forecast_inf_title">
