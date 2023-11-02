@@ -11,9 +11,9 @@ function ForecastHours() {
   const [date5, setDate5] = useState(null);
   const [w12, setW12] = useState<string | undefined>("");
   const [w15, setW15] = useState<string | undefined>("");
-  const [w18, setW18] = useState(null);
-  const [w21, setW21] = useState(null);
-  const [w00, setW00] = useState(null);
+  const [w18, setW18] = useState<string | undefined>("");
+  const [w21, setW21] = useState<string | undefined>("");
+  const [w00, setW00] = useState<string | undefined>("");
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -55,10 +55,10 @@ function ForecastHours() {
           setDate4(day3);
           setDate5(day4);
           setW12("./src/assets/" + W12 + ".png");
-          setW15(W15);
-          setW18(W18);
-          setW21(W21);
-          setW00(W00);
+          setW15("./src/assets/" + W15 + ".png");
+          setW18("./src/assets/" + W18 + ".png");
+          setW21("./src/assets/" + W21 + ".png");
+          setW00("./src/assets/" + W00 + ".png");
         }
       } catch (error) {
         // Обработка ошибок
@@ -114,12 +114,7 @@ function ForecastHours() {
           <p className="ForecastHours_inf_title_time" id="ChangeColor">
             18:00
           </p>
-          <img
-            src="./src/assets/clouds2.png"
-            alt="ph5"
-            width="80px"
-            height="80px"
-          />
+          <img src={w18} alt="ph5" width="80px" height="80px" />
           <p className="ForecastHours_inf_title_Co" id="ChangeColor">
             {date3}
           </p>
@@ -137,12 +132,7 @@ function ForecastHours() {
           <p className="ForecastHours_inf_title_time" id="ChangeColor">
             21:00
           </p>
-          <img
-            src="./src/assets/clouds2.png"
-            alt="ph7"
-            width="80px"
-            height="80px"
-          />
+          <img src={w21} alt="ph7" width="80px" height="80px" />
           <p className="ForecastHours_inf_title_Co" id="ChangeColor">
             {date4}
           </p>
@@ -160,12 +150,7 @@ function ForecastHours() {
           <p className="ForecastHours_inf_title_time" id="ChangeColor">
             00:00
           </p>
-          <img
-            src="./src/assets/clear3.png"
-            alt="ph9"
-            width="80px"
-            height="80px"
-          />
+          <img src={w00} alt="ph9" width="80px" height="80px" />
           <p className="ForecastHours_inf_title_Co" id="ChangeColor">
             {date5}
           </p>
