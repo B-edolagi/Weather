@@ -74,7 +74,12 @@ function Today() {
         </div>
         <div className="tmp_title">
           <div className="tmp_title_rise">
-            <img src={weather} alt="sunrise" width="48px" height="48px" />
+            <img
+              src="./src/assets/sunrise.png"
+              alt="sunrise"
+              width="48px"
+              height="48px"
+            />
             <div className="rise_title">
               <h3 id="ChangeColor">Sunrise</h3>
               <p className="rise_time" id="ChangeColor">
@@ -99,12 +104,7 @@ function Today() {
         </div>
       </div>
       <div className="Today_weather">
-        <img
-          src="./src/assets/clear11.png"
-          alt="weaher"
-          width="270px"
-          height="270px"
-        />
+        <img src={weather} alt="weaher" width="270px" height="270px" />
         <h2 id="ChangeColor">Sunny</h2> {/*   Information about weather */}
       </div>
       <div className="Today_inf">
