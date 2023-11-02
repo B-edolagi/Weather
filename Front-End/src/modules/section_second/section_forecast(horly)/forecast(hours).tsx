@@ -54,11 +54,11 @@ function ForecastHours() {
           const W18 = data["3"].weather[0].main;
           const W21 = data["4"].weather[0].main;
           const W00 = data["5"].weather[0].main;
-          const Speed1 = data["1"].wind.main;
-          const Speed2 = data["2"].wind.main;
-          const Speed3 = data["3"].wind.main;
-          const Speed4 = data["4"].wind.main;
-          const Speed5 = data["5"].wind.main;
+          const Speed1 = data["1"].wind.speed;
+          const Speed2 = data["2"].wind.speed;
+          const Speed3 = data["3"].wind.speed;
+          const Speed4 = data["4"].wind.speed;
+          const Speed5 = data["5"].wind.speed;
           setDate1(day0);
           setDate2(day1);
           setDate3(day2);
