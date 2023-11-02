@@ -69,13 +69,11 @@ function ForecastHours() {
           const day2 = formattedDates["3"].main.temp;
           const day3 = formattedDates["4"].main.temp;
           const day4 = formattedDates["5"].main.temp;
-          const W12 = formattedDates["1"].weather.main;
-          const weatherMain = data.weather[0].main;
-          const W15 = formattedDates["2"].weather.description;
-          const W18 = formattedDates["3"].weather.description;
-          const W21 = formattedDates["4"].weather.description;
+          const weatherMain = formattedDates["1"].weather[0].main;
+          const W15 = formattedDates["2"].weather[0].description;
+          const W18 = formattedDates["3"].weather[1].description;
+          const W21 = formattedDates["4"].weather[3].description;
           const W00 = formattedDates["5"].weather.description;
-          const w12ImageUrl = weatherIcons[W12];
           setDate1(day0);
           setDate2(day1);
           setDate3(day2);
