@@ -19,6 +19,7 @@ function Today() {
   const [sunrise, setSunrise] = useState(null);
   const [sunset, setSet] = useState(null);
   const [weather, setWeather] = useState<string | undefined>("");
+  const [txt, setTxt] = useState(null);
   var data = new URLSearchParams();
   data.append("username", "ilya");
   data.append("password", "123");
@@ -48,7 +49,9 @@ function Today() {
       const rise = data.sys.sunrise;
       const set = data.sys.sunset;
       const weather1 = data.weather[0].main;
+      const weather_txt = data.weather[0].main;
       // Можно выполнить какие-либо операции с температурой здесь, если необходимо
+      setTxt(weather_txt);
       setWeather("./src/assets/" + weather1 + ".png");
       setTemperature(temp); // Сохраняем значение температуры в состоянии компонента
       setFeel(fls);
@@ -105,7 +108,7 @@ function Today() {
       </div>
       <div className="Today_weather">
         <img src={weather} alt="weaher" width="270px" height="270px" />
-        <h2 id="ChangeColor">Sunny</h2> {/*   Information about weather */}
+        <h2 id="ChangeColor">{txt}</h2> {/*   Information about weather */}
       </div>
       <div className="Today_inf">
         <div className="Today_inf_title">
