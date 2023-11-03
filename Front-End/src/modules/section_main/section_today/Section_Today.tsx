@@ -15,7 +15,7 @@ function Today() {
   const [pressure, setPressure] = useState(null);
   const [humidity, setHumidity] = useState(null);
   const [uv, setUv] = useState(null);
-  const [speed, setSpeed] = useState(null);
+  const [speed, setSpeed] = useState<number | null>(null);
   const [sunrise, setSunrise] = useState(null);
   const [sunset, setSet] = useState(null);
   const [weather, setWeather] = useState<string | undefined>("");
@@ -45,7 +45,7 @@ function Today() {
       const prsr = data.main.pressure;
       const hmdt = data.main.humidity;
       const deg = data.wind.deg;
-      const spd = data.wind.speed;
+      const spd = Math.round(data.wind.speed);
       const rise = data.sys.sunrise;
       const set = data.sys.sunset;
       const weather1 = data.weather[0].main;
@@ -69,10 +69,10 @@ function Today() {
     <div className="Today_block" id="TodaySection">
       <div className="Today_block_tmp">
         <div className="tmp_main">
-          <h2 className="tmp_main_C0">{temperature} °C</h2>
+          <h2 className="tmp_main_C0">{temperature}°C</h2>
           <div>
             <h3>Feels like:</h3>
-            <p>{feel}</p>
+            <p>{feel}°C</p>
           </div>
         </div>
         <div className="tmp_title">
