@@ -1,20 +1,52 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import Button from "../../components/Button";
-import { useCity } from "../../components/CityContext";
+import { getToken } from "../register/token"; // Путь к файлу api.ts
 function Header() {
-  const { setCity } = useCity();
+  const [token, setToken] = useState<string | null>("");
+  useEffect(() => {
+    getToken().then((token) => {
+      if (token) {
+        setToken(token);
+      }
+    });
+  }, []);
   const [inputCity, setInputCity] = useState("");
+  const [isLoading, setIsLoading] = useState(false); // Добавьте состояние для отслеживания загрузки
 
   const handleCityChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInputCity(e.target.value);
   };
 
-  const handleFetchWeather = () => {
-    if (setCity) {
-      setCity(inputCity);
+  const handleFetchWeather = async () => {
+    if (inputCity) {
+      setIsLoading(true); // Установите флаг загрузки перед запросом
+
+      try {
+        const response = await fetch(
+          `http://localhost:8080/getCurrentWeather?city=${inputCity}`,
+          {
+            method: "GET",
+            credentials: "include",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+
+        const data = await response.json();
+        // Обработка полученных данных
+      } catch (error) {
+        // Обработка ошибок
+      } finally {
+        setIsLoading(false); // Установите флаг загрузки после запроса
+      }
     }
   };
-
   const [isMoved, setIsMoved] = useState(false);
   const [isLightMode, setIsLightMode] = useState(true);
   const changeBlockColor = () => {
@@ -125,7 +157,9 @@ function Header() {
             value={inputCity}
             onChange={handleCityChange}
           />
-          <button onClick={handleFetchWeather}>Получить погоду</button>
+          <button onClick={handleFetchWeather} disabled={isLoading}>
+            {isLoading ? "Загрузка..." : "Получить погоду"}
+          </button>
         </label>
         <>
           <Button
