@@ -27,6 +27,7 @@ function Today() {
   const { city } = useCity();
   // Ваш fetch запрос
   useEffect(() => {
+    console.log(city); // Добавьте эту строку для проверки, меняется ли 'city'
     if (city) {
       fetch(`http://localhost:8080/getCurrentWeather?city=${city}`, {
         method: "GET",
@@ -64,10 +65,12 @@ function Today() {
           setSpeed(spd);
           setSunrise(rise);
           setSet(set);
+          console.log(data);
         })
         .catch((error) => {
           // Обработка ошибок
         });
+      console.log(data);
     }
   }, [city]);
   return (
