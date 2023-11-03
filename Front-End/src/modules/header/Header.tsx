@@ -1,6 +1,20 @@
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import Button from "../../components/Button";
+import { useCity } from "../../components/CityContext";
 function Header() {
+  const { setCity } = useCity();
+  const [inputCity, setInputCity] = useState("");
+
+  const handleCityChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setInputCity(e.target.value);
+  };
+
+  const handleFetchWeather = () => {
+    if (setCity) {
+      setCity(inputCity);
+    }
+  };
+
   const [isMoved, setIsMoved] = useState(false);
   const [isLightMode, setIsLightMode] = useState(true);
   const changeBlockColor = () => {
@@ -106,11 +120,12 @@ function Header() {
         </div>
         <label htmlFor="search" className="list_search">
           <input
-            type="search"
-            name="search"
-            id="search"
-            placeholder="Search for your preferred city..."
+            type="text"
+            placeholder="Введите город"
+            value={inputCity}
+            onChange={handleCityChange}
           />
+          <button onClick={handleFetchWeather}>Получить погоду</button>
         </label>
         <>
           <Button

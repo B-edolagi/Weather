@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getToken } from "../../register/token"; // Путь к файлу api.ts
-
+import { useCity } from "../../../components/CityContext";
 function Today() {
   const [token, setToken] = useState<string | null>("");
   useEffect(() => {
@@ -24,47 +24,52 @@ function Today() {
   data.append("username", "ilya");
   data.append("password", "123");
   const jsessionId = localStorage.getItem("jsessionid");
-
-  fetch("http://localhost:8080/getCurrentWeather", {
-    method: "GET",
-    credentials: "include",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`, // Используем сохраненный токен
-    },
-  })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      return response.json(); // Обработка ответа
-    })
-    .then((data) => {
-      const temp = data.main.temp;
-      const fls = data.main.feels_like;
-      const prsr = data.main.pressure;
-      const hmdt = data.main.humidity;
-      const deg = data.wind.deg;
-      const spd = Math.round(data.wind.speed);
-      const rise = data.sys.sunrise;
-      const set = data.sys.sunset;
-      const weather1 = data.weather[0].main;
-      const weather_txt = data.weather[0].main;
-      // Можно выполнить какие-либо операции с температурой здесь, если необходимо
-      setTxt(weather_txt);
-      setWeather("./src/assets/" + weather1 + ".png");
-      setTemperature(temp); // Сохраняем значение температуры в состоянии компонента
-      setFeel(fls);
-      setPressure(prsr);
-      setHumidity(hmdt);
-      setUv(deg);
-      setSpeed(spd);
-      setSunrise(rise);
-      setSet(set);
-    })
-    .catch((error) => {
-      // Обработка ошибок
-    });
+  const { city } = useCity();
+  // Ваш fetch запрос
+  useEffect(() => {
+    if (city) {
+      fetch(`http://localhost:8080/getCurrentWeather?city=${city}`, {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          const temp = data.main.temp;
+          const fls = data.main.feels_like;
+          const prsr = data.main.pressure;
+          const hmdt = data.main.humidity;
+          const deg = data.wind.deg;
+          const spd = Math.round(data.wind.speed);
+          const rise = data.sys.sunrise;
+          const set = data.sys.sunset;
+          const weather1 = data.weather[0].main;
+          const weather_txt = data.weather[0].main;
+          // Можно выполнить какие-либо операции с температурой здесь, если необходимо
+          setTxt(weather_txt);
+          setWeather("./src/assets/" + weather1 + ".png");
+          setTemperature(temp); // Сохраняем значение температуры в состоянии компонента
+          setFeel(fls);
+          setPressure(prsr);
+          setHumidity(hmdt);
+          setUv(deg);
+          setSpeed(spd);
+          setSunrise(rise);
+          setSet(set);
+        })
+        .catch((error) => {
+          // Обработка ошибок
+        });
+    }
+  }, [city]);
   return (
     <div className="Today_block" id="TodaySection">
       <div className="Today_block_tmp">
