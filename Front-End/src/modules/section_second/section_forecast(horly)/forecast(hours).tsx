@@ -104,7 +104,7 @@ function ForecastHours() {
             height="55px"
           />
           <p className="ForecastHours_inf_title_speed" id="ChangeColor">
-            {speed_1}
+            {speed_1} km/h
           </p>
         </div>
         <div className="ForecastHours_inf_title">
@@ -122,7 +122,7 @@ function ForecastHours() {
             height="55px"
           />
           <p className="ForecastHours_inf_title_speed" id="ChangeColor">
-            {speed_2}
+            {speed_2} km/h
           </p>
         </div>
         <div className="ForecastHours_inf_title">
@@ -140,7 +140,7 @@ function ForecastHours() {
             height="55px"
           />
           <p className="ForecastHours_inf_title_speed" id="ChangeColor">
-            {speed_3}
+            {speed_3} km/h
           </p>
         </div>
         <div className="ForecastHours_inf_title_night">
@@ -158,7 +158,7 @@ function ForecastHours() {
             height="55px"
           />
           <p className="ForecastHours_inf_title_speed" id="ChangeColor">
-            {speed_4}
+            {speed_4} km/h
           </p>
         </div>
         <div className="ForecastHours_inf_title_night">
@@ -176,7 +176,7 @@ function ForecastHours() {
             height="55px"
           />
           <p className="ForecastHours_inf_title_speed" id="ChangeColor">
-            {speed_5}
+            {speed_5} km/h
           </p>
         </div>
       </div>
