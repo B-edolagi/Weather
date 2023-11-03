@@ -10,24 +10,18 @@ function Today() {
       }
     });
   }, []);
+
   const [temperature, setTemperature] = useState(null);
-  const [feel, setFeel] = useState(null);
-  const [pressure, setPressure] = useState(null);
-  const [humidity, setHumidity] = useState(null);
-  const [uv, setUv] = useState(null);
-  const [speed, setSpeed] = useState<number | null>(null);
-  const [sunrise, setSunrise] = useState(null);
-  const [sunset, setSet] = useState(null);
-  const [weather, setWeather] = useState<string | undefined>("");
-  const [txt, setTxt] = useState(null);
-  var data = new URLSearchParams();
-  data.append("username", "ilya");
-  data.append("password", "123");
-  const jsessionId = localStorage.getItem("jsessionid");
   const { city } = useCity();
-  // Ваш fetch запрос
+
+  // Добавим useEffect для логирования перерисовок компонента
   useEffect(() => {
-    console.log(city); // Добавьте эту строку для проверки, меняется ли 'city'
+    console.log("Today component has re-rendered!");
+  }, [temperature, city]);
+
+  useEffect(() => {
+    console.log(city);
+
     if (city) {
       fetch(`http://localhost:8080/getCurrentWeather?city=${city}`, {
         method: "GET",
@@ -45,32 +39,13 @@ function Today() {
         })
         .then((data) => {
           const temp = data.main.temp;
-          const fls = data.main.feels_like;
-          const prsr = data.main.pressure;
-          const hmdt = data.main.humidity;
-          const deg = data.wind.deg;
-          const spd = Math.round(data.wind.speed);
-          const rise = data.sys.sunrise;
-          const set = data.sys.sunset;
-          const weather1 = data.weather[0].main;
-          const weather_txt = data.weather[0].main;
-          // Можно выполнить какие-либо операции с температурой здесь, если необходимо
-          setTxt(weather_txt);
-          setWeather("./src/assets/" + weather1 + ".png");
-          setTemperature(temp); // Сохраняем значение температуры в состоянии компонента
-          setFeel(fls);
-          setPressure(prsr);
-          setHumidity(hmdt);
-          setUv(deg);
-          setSpeed(spd);
-          setSunrise(rise);
-          setSet(set);
+          setTemperature(temp);
+          // ... остальные установки состояний
           console.log(data);
         })
         .catch((error) => {
           // Обработка ошибок
         });
-      console.log(data);
     }
   }, [city]);
   return (
@@ -80,12 +55,12 @@ function Today() {
           <h2 className="tmp_main_C0">
             {temperature ? `${temperature}°C` : "N/A"}°C
           </h2>
-          <div>
+          {/* <div>
             <h3>Feels like:</h3>
             <p>{feel ? `${feel}°C` : "N/A"}°C</p>
-          </div>
+          </div> */}
         </div>
-        <div className="tmp_title">
+        {/* <div className="tmp_title">
           <div className="tmp_title_rise">
             <img
               src="./src/assets/sunrise.png"
@@ -120,7 +95,7 @@ function Today() {
         <img src={weather} alt="weaher" width="270px" height="270px" />
         <h2 id="ChangeColor">{txt}</h2> {/*   Information about weather */}
       </div>
-      <div className="Today_inf">
+      {/* <div className="Today_inf">
         <div className="Today_inf_title">
           <div className="inf_title_force">
             <img
@@ -172,8 +147,7 @@ function Today() {
               <h3 id="ChangeColor">UV</h3>
             </div>
           </div>
-        </div>
-      </div>
+        </div> */}
     </div>
   );
 }
