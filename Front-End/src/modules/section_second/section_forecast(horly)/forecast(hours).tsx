@@ -14,11 +14,11 @@ function ForecastHours() {
   const [w18, setW18] = useState<string | undefined>("");
   const [w21, setW21] = useState<string | undefined>("");
   const [w00, setW00] = useState<string | undefined>("");
-  const [speed_1, setSpeed_1] = useState(null);
-  const [speed_2, setSpeed_2] = useState(null);
-  const [speed_3, setSpeed_3] = useState(null);
-  const [speed_4, setSpeed_4] = useState(null);
-  const [speed_5, setSpeed_5] = useState(null);
+  const [speed_1, setSpeed_1] = useState<number | null>(null);
+  const [speed_2, setSpeed_2] = useState<number | null>(null);
+  const [speed_3, setSpeed_3] = useState<number | null>(null);
+  const [speed_4, setSpeed_4] = useState<number | null>(null);
+  const [speed_5, setSpeed_5] = useState<number | null>(null);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -54,11 +54,11 @@ function ForecastHours() {
           const W18 = data["3"].weather[0].main;
           const W21 = data["4"].weather[0].main;
           const W00 = data["5"].weather[0].main;
-          const Speed1 = data["1"].wind.speed;
-          const Speed2 = data["2"].wind.speed;
-          const Speed3 = data["3"].wind.speed;
-          const Speed4 = data["4"].wind.speed;
-          const Speed5 = data["5"].wind.speed;
+          const Speed1 = Math.round(data["1"].wind.speed);
+          const Speed2 = Math.round(data["1"].wind.speed);
+          const Speed3 = Math.round(data["1"].wind.speed);
+          const Speed4 = Math.round(data["1"].wind.speed);
+          const Speed5 = Math.round(data["1"].wind.speed);
           setDate1(day0);
           setDate2(day1);
           setDate3(day2);
@@ -95,7 +95,7 @@ function ForecastHours() {
           </p>
           <img src={w12} alt="ph1" width="80px" height="80px" />
           <p className="ForecastHours_inf_title_Co" id="ChangeColor">
-            {date1}
+            {date1}°C
           </p>
           <img
             src="./src/assets/navigation1.png"
@@ -113,7 +113,7 @@ function ForecastHours() {
           </p>
           <img src={w15} alt="ph3" width="80px" height="80px" />
           <p className="ForecastHours_inf_title_Co" id="ChangeColor">
-            {date2}
+            {date2}°C
           </p>
           <img
             src="./src/assets/navigation1.png"
@@ -131,7 +131,7 @@ function ForecastHours() {
           </p>
           <img src={w18} alt="ph5" width="80px" height="80px" />
           <p className="ForecastHours_inf_title_Co" id="ChangeColor">
-            {date3}
+            {date3}°C
           </p>
           <img
             src="./src/assets/navigation1.png"
@@ -149,7 +149,7 @@ function ForecastHours() {
           </p>
           <img src={w21} alt="ph7" width="80px" height="80px" />
           <p className="ForecastHours_inf_title_Co" id="ChangeColor">
-            {date4}
+            {date4}°C
           </p>
           <img
             src="./src/assets/navigation1.png"
@@ -167,7 +167,7 @@ function ForecastHours() {
           </p>
           <img src={w00} alt="ph9" width="80px" height="80px" />
           <p className="ForecastHours_inf_title_Co" id="ChangeColor">
-            {date5}
+            {date5}°C
           </p>
           <img
             src="./src/assets/navigation1.png"

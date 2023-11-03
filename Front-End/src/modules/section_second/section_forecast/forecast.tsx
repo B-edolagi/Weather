@@ -130,7 +130,7 @@ function Forecast() {
         <div className="Forecast_inf_title">
           <img src={w12} alt="photo1" width="60px" height="60px" />
           <p className="Forecast_inf_title_p" id="ChangeColor">
-            {date1 !== null ? date1 : "Loading..."}
+            {date1 !== null ? date1 : "Loading..."}°C
           </p>
           <p className="Forecast_inf_title_day" id="ChangeColor">
             {formattedDates1[0]}
@@ -139,7 +139,7 @@ function Forecast() {
         <div className="Forecast_inf_title">
           <img src={w15} alt="photo2" width="60px" height="60px" />
           <p className="Forecast_inf_title_p" id="ChangeColor">
-            {date2}
+            {date2}°C
           </p>
           <p className="Forecast_inf_title_day" id="ChangeColor">
             {formattedDates1[1]}
@@ -148,7 +148,7 @@ function Forecast() {
         <div className="Forecast_inf_title">
           <img src={w18} alt="photo3" width="60px" height="60px" />
           <p className="Forecast_inf_title_p" id="ChangeColor">
-            {date3}
+            {date3}°C
           </p>
           <p className="Forecast_inf_title_day" id="ChangeColor">
             {formattedDates1[2]}
@@ -157,7 +157,7 @@ function Forecast() {
         <div className="Forecast_inf_title">
           <img src={w21} alt="photo4" width="60px" height="60px" />
           <p className="Forecast_inf_title_p" id="ChangeColor">
-            {date4}
+            {date4}°C
           </p>
           <p className="Forecast_inf_title_day" id="ChangeColor">
             {formattedDates1[3]}
@@ -166,7 +166,7 @@ function Forecast() {
         <div className="Forecast_inf_title">
           <img src={w00} alt="photo5" width="60px" height="60px" />
           <p className="Forecast_inf_title_p" id="ChangeColor">
-            {date5}
+            {date5}°C
           </p>
           <p className="Forecast_inf_title_day" id="ChangeColor">
             {formattedDates1[4]}
