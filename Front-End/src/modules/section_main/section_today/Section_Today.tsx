@@ -60,8 +60,8 @@ function Today() {
           const hours = dateTime.getHours().toString().padStart(2, "0");
           const minutes = dateTime.getMinutes().toString().padStart(2, "0");
           const dateTime1 = new Date(set);
-          const hours1 = dateTime.getHours().toString().padStart(2, "0");
-          const minutes1 = dateTime.getMinutes().toString().padStart(2, "0");
+          const hours1 = dateTime1.getHours().toString().padStart(2, "0");
+          const minutes1 = dateTime1.getMinutes().toString().padStart(2, "0");
           // Можно выполнить какие-либо операции с температурой здесь, если необходимо
           setTxt(weather_txt);
           setWeather("./src/assets/" + weather1 + ".png");
@@ -72,7 +72,7 @@ function Today() {
           setUv(deg);
           setSpeed(spd);
           setSunrise(`${hours}:${minutes}`);
-          setSet(`${hours}:${minutes}`);
+          setSet(`${hours1}:${minutes1}`);
         })
         .catch((error) => {
           console.error("Ошибка при запросе данных:", error);
