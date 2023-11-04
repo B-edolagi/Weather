@@ -1,9 +1,17 @@
 import { useEffect, useState } from "react";
 import { getToken } from "../../register/token";
-
+import { useCity } from "../../../components/CityContext";
 function ForecastHours() {
-  const jsessionId = localStorage.getItem("jsessionid");
   const [token, setToken] = useState<string | null>("");
+  useEffect(() => {
+    getToken().then((token) => {
+      if (token) {
+        setToken(token);
+      }
+    });
+  }, []);
+  const jsessionId = localStorage.getItem("jsessionid");
+  const { city } = useCity();
   const [date1, setDate1] = useState(null);
   const [date2, setDate2] = useState(null);
   const [date3, setDate3] = useState(null);
@@ -19,31 +27,56 @@ function ForecastHours() {
   const [speed_3, setSpeed_3] = useState<number | null>(null);
   const [speed_4, setSpeed_4] = useState<number | null>(null);
   const [speed_5, setSpeed_5] = useState<number | null>(null);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const fetchedToken = await getToken();
+  //       if (fetchedToken) {
+  //         setToken(fetchedToken);
+
+  //         // Теперь, когда у нас есть токен, можем выполнить запрос на сервер
+  //         const response = await fetch(
+  //           "http://localhost:8080/getHourlyWeather",
+  //           {
+  //             method: "GET",
+  //             credentials: "include",
+  //             headers: {
+  //               "Content-Type": "application/json",
+  //               Authorization: `Bearer ${fetchedToken}`,
+  //             },
+  //           }
+  //         );
+
+  //         if (!response.ok) {
+  //           throw new Error("Network response was not ok");
+  //         }
+
+  //       }
+  //     } catch (error) {
+  //       // Обработка ошибок
+  //     }
+  //   };
+
+  //   fetchData();
+  // }, [jsessionId]);
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const fetchedToken = await getToken();
-        if (fetchedToken) {
-          setToken(fetchedToken);
-
-          // Теперь, когда у нас есть токен, можем выполнить запрос на сервер
-          const response = await fetch(
-            "http://localhost:8080/getHourlyWeather",
-            {
-              method: "GET",
-              credentials: "include",
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${fetchedToken}`,
-              },
-            }
-          );
-
+    console.log("город" + city); // Добавьте эту строку для проверки, меняется ли 'city'
+    if (city) {
+      fetch(`http://localhost:8080/getDailyWeather?city=${city}`, {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then((response) => {
           if (!response.ok) {
             throw new Error("Network response was not ok");
           }
-
-          const data = await response.json();
+          return response.json();
+        })
+        .then((data) => {
           const day0 = data["1"].main.temp;
           const day1 = data["2"].main.temp;
           const day2 = data["3"].main.temp;
@@ -74,15 +107,13 @@ function ForecastHours() {
           setW18("./src/assets/" + W18 + ".png");
           setW21("./src/assets/" + W21 + ".png");
           setW00("./src/assets/" + W00 + ".png");
-        }
-      } catch (error) {
-        // Обработка ошибок
-      }
-    };
-
-    fetchData();
-  }, [jsessionId]);
-
+        })
+        .catch((error) => {
+          console.error("Ошибка при запросе данных:", error);
+          // Дополнительная обработка ошибок
+        });
+    }
+  }, [city]);
   return (
     <div className="ForecastHours_main" id="ForecastHours">
       <h2 className="ForecastHours" id="ChangeColor">
