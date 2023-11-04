@@ -79,11 +79,11 @@ function Today() {
       <div className="Today_block_tmp">
         <div className="tmp_main">
           <h2 className="tmp_main_C0">
-            {temperature ? `${temperature}°C` : "N/A"}°C
+            {temperature ? `${temperature}` : "N/A"}°C
           </h2>
           <div>
             <h3>Feels like:</h3>
-            <p>{feel ? `${feel}°C` : "N/A"}°C</p>
+            <p>{feel ? `${feel}` : "N/A"}°C</p>
           </div>
         </div>
         <div className="tmp_title">

@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { getToken } from "../../register/token"; // Путь к файлу api.ts
+import { useCity } from "../../../components/CityContext";
 function Forecast() {
-  const jsessionId = localStorage.getItem("jsessionid");
   const [token, setToken] = useState<string | null>("");
-
+  useEffect(() => {
+    getToken().then((token) => {
+      if (token) {
+        setToken(token);
+      }
+    });
+  }, []);
   const weekDays = [
     "Sunday",
     "Monday",
@@ -56,7 +62,8 @@ function Forecast() {
 
     formattedDates.push(formattedDate);
   }
-
+  const jsessionId = localStorage.getItem("jsessionid");
+  const { city } = useCity();
   const [date1, setDate1] = useState(null);
   const [date2, setDate2] = useState(null);
   const [date3, setDate3] = useState(null);
@@ -67,41 +74,67 @@ function Forecast() {
   const [w18, setW18] = useState<string | undefined>("");
   const [w21, setW21] = useState<string | undefined>("");
   const [w00, setW00] = useState<string | undefined>("");
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const fetchedToken = await getToken();
+  //       if (fetchedToken) {
+  //         setToken(fetchedToken);
+
+  //         // Теперь, когда у нас есть токен, можем выполнить запрос на сервер
+  //         const response = await fetch(
+  //           "http://localhost:8080/getDailyWeather",
+  //           {
+  //             method: "GET",
+  //             credentials: "include",
+  //             headers: {
+  //               "Content-Type": "application/json",
+  //               Authorization: `Bearer ${fetchedToken}`,
+  //             },
+  //           }
+  //         );
+
+  //         if (!response.ok) {
+  //           throw new Error("Network response was not ok");
+  //         }
+
+  //         const formattedDates = await response.json();
+  //       }
+  //     } catch (error) {
+  //       // Обработка ошибок
+  //     }
+  //   };
+
+  //   fetchData();
+  // }, [jsessionId]);
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const fetchedToken = await getToken();
-        if (fetchedToken) {
-          setToken(fetchedToken);
-
-          // Теперь, когда у нас есть токен, можем выполнить запрос на сервер
-          const response = await fetch(
-            "http://localhost:8080/getDailyWeather",
-            {
-              method: "GET",
-              credentials: "include",
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${fetchedToken}`,
-              },
-            }
-          );
-
+    console.log("город" + city); // Добавьте эту строку для проверки, меняется ли 'city'
+    if (city) {
+      fetch(`http://localhost:8080/getDailyWeather?city=${city}`, {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then((response) => {
           if (!response.ok) {
             throw new Error("Network response was not ok");
           }
-
-          const formattedDates = await response.json();
-          const day0 = formattedDates["1"].main.temp;
-          const day1 = formattedDates["2"].main.temp;
-          const day2 = formattedDates["3"].main.temp;
-          const day3 = formattedDates["4"].main.temp;
-          const day4 = formattedDates["5"].main.temp;
-          const W12 = formattedDates["1"].weather[0].main;
-          const W15 = formattedDates["2"].weather[0].main;
-          const W18 = formattedDates["3"].weather[0].main;
-          const W21 = formattedDates["4"].weather[0].main;
-          const W00 = formattedDates["5"].weather[0].main;
+          return response.json();
+        })
+        .then((data) => {
+          const day0 = data["1"].main.temp;
+          const day1 = data["2"].main.temp;
+          const day2 = data["3"].main.temp;
+          const day3 = data["4"].main.temp;
+          const day4 = data["5"].main.temp;
+          const W12 = data["1"].weather[0].main;
+          const W15 = data["2"].weather[0].main;
+          const W18 = data["3"].weather[0].main;
+          const W21 = data["4"].weather[0].main;
+          const W00 = data["5"].weather[0].main;
           setDate1(day0);
           setDate2(day1);
           setDate3(day2);
@@ -112,15 +145,13 @@ function Forecast() {
           setW18("./src/assets/" + W18 + ".png");
           setW21("./src/assets/" + W21 + ".png");
           setW00("./src/assets/" + W00 + ".png");
-        }
-      } catch (error) {
-        // Обработка ошибок
-      }
-    };
-
-    fetchData();
-  }, [jsessionId]);
-
+        })
+        .catch((error) => {
+          console.error("Ошибка при запросе данных:", error);
+          // Дополнительная обработка ошибок
+        });
+    }
+  }, [city]);
   return (
     <div className="Forecast" id="Forecast">
       <h2 className="Forecast_Name" id="ChangeColor">
