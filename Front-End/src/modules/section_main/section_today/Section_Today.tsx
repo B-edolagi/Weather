@@ -16,8 +16,8 @@ function Today() {
   const [humidity, setHumidity] = useState(null);
   const [uv, setUv] = useState(null);
   const [speed, setSpeed] = useState<number | null>(null);
-  const [sunrise, setSunrise] = useState<string | null>(null);
-  const [sunset, setSet] = useState<string | null>(null);
+  const [sunrise, setSunrise] = useState<null | string>(null); // Используйте null как начальное значение
+  const [sunset, setSet] = useState(null);
   const [weather, setWeather] = useState<string | undefined>("");
   const [txt, setTxt] = useState(null);
   var data = new URLSearchParams();
@@ -56,35 +56,9 @@ function Today() {
           const set = data.sys.sunset;
           const weather1 = data.weather[0].main;
           const weather_txt = data.weather[0].main;
-          if (!isNaN(rise) && !isNaN(set)) {
-            const sunriseDate = new Date(rise * 1000); // Умножьте на 1000 для преобразования в миллисекунды
-            const sunsetDate = new Date(set * 1000);
-
-            // Извлечение часов и минут
-            const sunriseHours = sunriseDate
-              .getHours()
-              .toString()
-              .padStart(2, "0");
-            const sunriseMinutes = sunriseDate
-              .getMinutes()
-              .toString()
-              .padStart(2, "0");
-            const sunsetHours = sunsetDate
-              .getHours()
-              .toString()
-              .padStart(2, "0");
-            const sunsetMinutes = sunsetDate
-              .getMinutes()
-              .toString()
-              .padStart(2, "0");
-
-            // Обновление состояний
-            setSunrise(`${sunriseHours}:${sunriseMinutes}`);
-            setSet(`${sunsetHours}:${sunsetMinutes}`);
-          } else {
-            // Обработка некорректных данных времени
-            console.error("Некорректные данные времени рассвета и заката");
-          }
+          const dateTime = new Date(rise);
+          const hours = dateTime.getHours().toString().padStart(2, "0");
+          const minutes = dateTime.getMinutes().toString().padStart(2, "0");
           // Можно выполнить какие-либо операции с температурой здесь, если необходимо
           setTxt(weather_txt);
           setWeather("./src/assets/" + weather1 + ".png");
@@ -94,7 +68,7 @@ function Today() {
           setHumidity(hmdt);
           setUv(deg);
           setSpeed(spd);
-          setSunrise(rise);
+          setSunrise(`${hours}:${minutes}`);
           setSet(set);
         })
         .catch((error) => {
