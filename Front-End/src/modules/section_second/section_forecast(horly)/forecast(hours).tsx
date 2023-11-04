@@ -27,38 +27,6 @@ function ForecastHours() {
   const [speed_3, setSpeed_3] = useState<number | null>(null);
   const [speed_4, setSpeed_4] = useState<number | null>(null);
   const [speed_5, setSpeed_5] = useState<number | null>(null);
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const fetchedToken = await getToken();
-  //       if (fetchedToken) {
-  //         setToken(fetchedToken);
-
-  //         // Теперь, когда у нас есть токен, можем выполнить запрос на сервер
-  //         const response = await fetch(
-  //           "http://localhost:8080/getHourlyWeather",
-  //           {
-  //             method: "GET",
-  //             credentials: "include",
-  //             headers: {
-  //               "Content-Type": "application/json",
-  //               Authorization: `Bearer ${fetchedToken}`,
-  //             },
-  //           }
-  //         );
-
-  //         if (!response.ok) {
-  //           throw new Error("Network response was not ok");
-  //         }
-
-  //       }
-  //     } catch (error) {
-  //       // Обработка ошибок
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, [jsessionId]);
   useEffect(() => {
     console.log("город" + city); // Добавьте эту строку для проверки, меняется ли 'city'
     if (city) {

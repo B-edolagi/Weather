@@ -1,54 +1,45 @@
 import { useEffect, useState } from "react";
 import TimeDiv from "../../../components/Time";
 import Time2 from "../../../components/Time2";
+import { getToken } from "../../register/token"; // Путь к файлу api.ts
+import { useCity } from "../../../components/CityContext";
+
 const Time: React.FC = () => {
-  const [city, setCity] = useState<string | null>(null);
-
+  const [token, setToken] = useState<string | null>("");
   useEffect(() => {
-    // Функция для получения геолокации пользователя
-    const getLocation = () => {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showCity, handleLocationError);
-      } else {
-        console.log("Геолокация не поддерживается вашим браузером.");
+    getToken().then((token) => {
+      if (token) {
+        setToken(token);
       }
-    };
-
-    // Функция для отображения города на странице
-    const showCity = (position: GeolocationPosition) => {
-      // Получаем координаты пользователя
-      const latitude = position.coords.latitude;
-      const longitude = position.coords.longitude;
-
-      // Создаем запрос к геосервису для определения местоположения на английском языке
-      const geoServiceUrl = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&accept-language=en`;
-
-      // Отправляем запрос
-      fetch(geoServiceUrl)
-        .then((response) => response.json())
-        .then((data) => {
-          // Извлекаем английское название города из полученных данных
-          const city = data.address.city;
-
-          // Устанавливаем город в состояние компонента
-          setCity(city);
-        })
-        .catch((error) => {
-          console.error(
-            "Ошибка при получении данных о местоположении: " + error
-          );
-        });
-    };
-
-    // Функция для обработки ошибок геолокации
-    const handleLocationError = (error: GeolocationPositionError) => {
-      console.error("Ошибка при получении геолокации: " + error.message);
-    };
-
-    // Вызываем функцию для получения геолокации при загрузке компонента
-    getLocation();
+    });
   }, []);
-
+  const { city } = useCity();
+  const jsessionId = localStorage.getItem("jsessionid");
+  // Ваш fetch запрос
+  useEffect(() => {
+    console.log("город" + city); // Добавьте эту строку для проверки, меняется ли 'city'
+    if (city) {
+      fetch(`http://localhost:8080/getCurrentWeather?city=${city}`, {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          return response.json();
+        })
+        .then((data) => {})
+        .catch((error) => {
+          console.error("Ошибка при запросе данных:", error);
+          // Дополнительная обработка ошибок
+        });
+    }
+  }, [city]);
   return (
     <div id="timeSection" className="Time_section">
       {city ? (
