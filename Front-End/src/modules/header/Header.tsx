@@ -1,6 +1,7 @@
 import { ChangeEvent, useEffect, useState } from "react";
 import Button from "../../components/Button";
 import { getToken } from "../register/token"; // Путь к файлу api.ts
+import { useCity } from "../../components/CityContext";
 function Header() {
   const [token, setToken] = useState<string | null>("");
   useEffect(() => {
@@ -16,10 +17,10 @@ function Header() {
   const handleCityChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInputCity(e.target.value);
   };
-
+  const { city, setCity } = useCity();
   const handleFetchWeather = async () => {
     if (inputCity) {
-      setIsLoading(true); // Установите флаг загрузки перед запросом
+      setIsLoading(true);
 
       try {
         const response = await fetch(
@@ -39,11 +40,16 @@ function Header() {
         }
 
         const data = await response.json();
-        // Обработка полученных данных
+
+        if (setCity) {
+          setCity(inputCity); // Проверьте, что setCity существует
+        }
+
+        // Другие действия по обработке данных
       } catch (error) {
         // Обработка ошибок
       } finally {
-        setIsLoading(false); // Установите флаг загрузки после запроса
+        setIsLoading(false);
       }
     }
   };
