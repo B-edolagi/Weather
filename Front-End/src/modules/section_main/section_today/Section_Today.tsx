@@ -69,7 +69,8 @@ function Today() {
           setSet(set);
         })
         .catch((error) => {
-          // Обработка ошибок
+          console.error("Ошибка при запросе данных:", error);
+          // Дополнительная обработка ошибок
         });
     }
   }, [city]);
