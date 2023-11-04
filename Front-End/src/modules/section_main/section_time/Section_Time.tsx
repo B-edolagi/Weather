@@ -42,11 +42,7 @@ const Time: React.FC = () => {
   }, [city]);
   return (
     <div id="timeSection" className="Time_section">
-      {city ? (
-        <h2 id="ChangeColor">{city}</h2>
-      ) : (
-        <p>Determining your city...</p>
-      )}
+      {city && <div>{city.charAt(0).toUpperCase() + city.slice(1)}</div>}
       <div>
         {" "}
         <TimeDiv />
