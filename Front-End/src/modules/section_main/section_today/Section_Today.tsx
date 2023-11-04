@@ -65,8 +65,8 @@ function Today() {
           setHumidity(hmdt);
           setUv(deg);
           setSpeed(spd);
-          setSunrise(rise);
-          setSet(set);
+          setSunrise(rise.split("T"));
+          setSet(set.split("T"));
         })
         .catch((error) => {
           console.error("Ошибка при запросе данных:", error);
