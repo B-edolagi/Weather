@@ -16,8 +16,8 @@ function Today() {
   const [humidity, setHumidity] = useState(null);
   const [uv, setUv] = useState(null);
   const [speed, setSpeed] = useState<number | null>(null);
-  const [sunrise, setSunrise] = useState(null);
-  const [sunset, setSet] = useState(null);
+  const [sunrise, setSunrise] = useState<string | null>(null);
+  const [sunset, setSunset] = useState<string | null>(null);
   const [weather, setWeather] = useState<string | undefined>("");
   const [txt, setTxt] = useState(null);
   var data = new URLSearchParams();
@@ -56,6 +56,27 @@ function Today() {
           const set = data.sys.sunset;
           const weather1 = data.weather[0].main;
           const weather_txt = data.weather[0].main;
+          const sunriseDate = new Date(rise * 1000);
+          const sunsetDate = new Date(set * 1000);
+
+          // Извлеките часы и минуты из даты
+          const sunriseHours = sunriseDate
+            .getHours()
+            .toString()
+            .padStart(2, "0");
+          const sunriseMinutes = sunriseDate
+            .getMinutes()
+            .toString()
+            .padStart(2, "0");
+          const sunsetHours = sunsetDate.getHours().toString().padStart(2, "0");
+          const sunsetMinutes = sunsetDate
+            .getMinutes()
+            .toString()
+            .padStart(2, "0");
+
+          // Обновите состояния с обрезанными значениями
+          setSunrise(`${sunriseHours}:${sunriseMinutes}`);
+          setSunset(`${sunsetHours}:${sunsetMinutes}`);
           // Можно выполнить какие-либо операции с температурой здесь, если необходимо
           setTxt(weather_txt);
           setWeather("./src/assets/" + weather1 + ".png");
@@ -65,8 +86,6 @@ function Today() {
           setHumidity(hmdt);
           setUv(deg);
           setSpeed(spd);
-          setSunrise(rise.split("T"));
-          setSet(set.split("T"));
         })
         .catch((error) => {
           console.error("Ошибка при запросе данных:", error);

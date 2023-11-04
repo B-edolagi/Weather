@@ -30,7 +30,7 @@ function ForecastHours() {
   useEffect(() => {
     console.log("город" + city); // Добавьте эту строку для проверки, меняется ли 'city'
     if (city) {
-      fetch(`http://localhost:8080/getDailyWeather?city=${city}`, {
+      fetch(`http://localhost:8080/getHourlyWeather?city=${city}`, {
         method: "GET",
         credentials: "include",
         headers: {
