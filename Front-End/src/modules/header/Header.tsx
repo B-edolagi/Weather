@@ -162,17 +162,17 @@ function Header() {
             placeholder="Введите город"
             value={inputCity}
             onChange={handleCityChange}
+            id="search"
           />
-          <button onClick={handleFetchWeather} disabled={isLoading}>
-            {isLoading ? "Загрузка..." : "Получить погоду"}
-          </button>
         </label>
         <>
-          <Button
-            onClick={function (): void {
-              throw new Error("Function not implemented.");
-            }}
-          />
+          <button
+            onClick={handleFetchWeather}
+            disabled={isLoading}
+            className="Current_btn"
+          >
+            {isLoading ? "Загрузка..." : "Confirm"}
+          </button>
         </>
       </div>
     </header>

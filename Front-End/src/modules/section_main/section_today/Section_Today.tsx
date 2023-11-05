@@ -85,11 +85,13 @@ function Today() {
       <div className="Today_block_tmp">
         <div className="tmp_main">
           <h2 className="tmp_main_C0">
-            {temperature ? `${temperature}` : "N/A"}°C
+            {/* {temperature ? `${temperature}` : "N/A"} */}
+            {temperature}°C
           </h2>
           <div>
             <h3>Feels like:</h3>
-            <p>{feel ? `${feel}` : "N/A"}°C</p>
+            <p>{feel}°C</p>
+            {/* {feel ? `${feel}` : "N/A"} */}
           </div>
         </div>
         <div className="tmp_title">
@@ -103,7 +105,7 @@ function Today() {
             <div className="rise_title">
               <h3 id="ChangeColor">Sunrise</h3>
               <p className="rise_time" id="ChangeColor">
-                {sunrise}
+                {sunrise} AM
               </p>
             </div>
           </div>
@@ -117,15 +119,22 @@ function Today() {
             <div className="set_title">
               <h3 id="ChangeColor">Sunset</h3>
               <p className="set_time" id="ChangeColor">
-                {sunset}
+                {sunset} PM
               </p>
             </div>
           </div>
         </div>
       </div>
       <div className="Today_weather">
-        <img src={weather} alt="weaher" width="270px" height="270px" />
-        <h2 id="ChangeColor">{txt}</h2> {/*   Information about weather */}
+        {/* {weather} */}
+        <img
+          src="./src/assets/Clear.png"
+          alt="weaher"
+          width="250px"
+          height="250px"
+        />
+        <h2 id="ChangeColor">{txt}</h2> {/*   Information about weather */}{" "}
+        {/* {txt}*/}
       </div>
       <div className="Today_inf">
         <div className="Today_inf_title">
@@ -137,11 +146,11 @@ function Today() {
               height="50.13px"
             />
             <div className="force_title">
-              <p id="ChangeColor">{humidity}</p>
+              <p id="ChangeColor">{humidity}%</p>
               <h3 id="ChangeColor">Humidity</h3>
             </div>
           </div>
-          <div>
+          <div className="inf_title_force">
             <img
               src="./src/assets/wind.png"
               alt="wind"
@@ -149,13 +158,13 @@ function Today() {
               height="59.24px"
             />
             <div className="force_title">
-              <p id="ChangeColor">{speed}</p>
+              <p id="ChangeColor">{speed}km/h</p>
               <h3 id="ChangeColor">Wind Speed</h3>
             </div>
           </div>
         </div>
         <div className="Today_inf_title">
-          <div>
+          <div className="inf_title_force">
             <img
               src="./src/assets/pressure.png"
               alt="pressure"
@@ -163,11 +172,11 @@ function Today() {
               height="58px"
             />
             <div className="force_title">
-              <p id="ChangeColor">{pressure}</p>
+              <p id="ChangeColor">{pressure}hPa</p>
               <h3 id="ChangeColor">Pressure</h3>
             </div>
           </div>
-          <div>
+          <div className="inf_title_force">
             <img
               src="./src/assets/uv.png"
               alt="uv"
