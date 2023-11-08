@@ -199,25 +199,27 @@ function Header1() {
         </div>
       </header>
       <section className="section">
-        {cityData.map((cityInfo, index) => (
-          <div key={index} className="section_div" id="timeSection">
-            <h1>
-              {cityInfo.city.charAt(0).toUpperCase() + cityInfo.city.slice(1)}
-            </h1>
+        <div className="section_wrap">
+          {cityData.map((cityInfo, index) => (
+            <div key={index} className="section_div" id="timeSection">
+              <h1>
+                {cityInfo.city.charAt(0).toUpperCase() + cityInfo.city.slice(1)}
+              </h1>
 
-            <img
-              src={"./src/assets/" + cityInfo.weatherIcon + ".png"}
-              alt="Weather Icon"
-              width="156px"
-              height="156px"
-            />
-            <div className="blocks_flex">
-              <h2 id="paragraph">Tempreature:{cityInfo.temperature}°C</h2>
-              <p id="paragraph">Feels like:{cityInfo.feels}°C</p>
-              <p id="paragraph">Speed: {cityInfo.speed}km/h</p>
+              <img
+                src={"./src/assets/" + cityInfo.weatherIcon + ".png"}
+                alt="Weather Icon"
+                width="156px"
+                height="156px"
+              />
+              <div className="blocks_flex">
+                <h2 id="paragraph">Tempreature:{cityInfo.temperature}°C</h2>
+                <p id="paragraph">Feels like:{cityInfo.feels}°C</p>
+                <p id="paragraph">Speed: {cityInfo.speed}km/h</p>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </section>
     </>
   );

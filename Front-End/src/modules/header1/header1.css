@@ -150,6 +150,16 @@ input::placeholder {
     align-items: center;
 }
 
+.section_wrap {
+    max-width: 1440px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: wrap;
+    gap: 100px;
+}
+
 .section_div {
     padding: 20px 25px;
     border-radius: 30px;
