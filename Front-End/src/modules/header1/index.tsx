@@ -277,7 +277,9 @@ function Header1() {
                 </div>
                 <button
                   className="Main_btn"
-                  onClick={() => toggleContent(cityInfo.city)}
+                  onClick={() => {
+                    return sendRequestToServer;
+                  }}
                 >
                   .!.
                 </button>
