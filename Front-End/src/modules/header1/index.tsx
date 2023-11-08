@@ -17,6 +17,7 @@ function Header1() {
   const [inputCity, setInputCity] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [blockCounter, setBlockCounter] = useState(0);
+
   useEffect(() => {
     getToken().then((token) => {
       if (token) {
@@ -228,6 +229,7 @@ function Header1() {
                 <p>Feels like:{cityInfo.feels}°C</p>
                 <p>Speed: {cityInfo.speed}km/h</p>
               </div>
+              <button className="Main_btn">.!.</button>
             </div>
           ))}
         </div>

@@ -11,6 +11,7 @@ interface User {
 }
 
 const LoginScreen: React.FC = () => {
+  const [isContentVisible, setIsContentVisible] = useState(false); // New state variable
   const requestOptions = {
     method: "POST",
     headers: new Headers({ "Content-Type": "application/json" }),
@@ -70,12 +71,23 @@ const LoginScreen: React.FC = () => {
   const handleToggleShowPassword = () => {
     setShowPassword(!showPassword);
   };
-
+  const toggleContentVisibility = () => {
+    setIsContentVisible(!isContentVisible);
+  };
   return (
     <div>
       {loggedIn ? (
         <div>
-          <Header1 />
+          <>
+            <Header1 />
+            {isContentVisible && (
+              <>
+                <Header />
+                <SectionMain />
+                <SectionSecond />
+              </>
+            )}
+          </>
         </div>
       ) : (
         <div className="container__login">
