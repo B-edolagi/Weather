@@ -226,9 +226,7 @@ function Header1() {
                 <h2 id={`paragraph-${index}`}>
                   Tempreature:{cityInfo.temperature}°C
                 </h2>
-                <p id={`paragraph-feels-${index}`}>
-                  Feels like:{cityInfo.feels}°C
-                </p>
+                <p id={`paragraph${index}`}>Feels like:{cityInfo.feels}°C</p>
                 <p id={`paragraph-speed-${index}`}>
                   Speed: {cityInfo.speed}km/h
                 </p>
