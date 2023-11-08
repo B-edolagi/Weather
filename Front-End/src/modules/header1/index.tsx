@@ -174,7 +174,35 @@ function Header1() {
       }
     }
   };
-  const toggleContent = () => {
+  const sendRequestToServer = (cityName: string) => {
+    // Send a request to the server with the provided city name
+    // You can use the fetch or axios library for making the API request
+    // Replace the URL and request parameters with your actual server API
+    fetch(`http://your-server-url.com/api/endpoint?city=${cityName}`, {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        // Process the server response here
+        // You can update the state or perform other actions
+      })
+      .catch((error) => {
+        // Handle errors
+      });
+  };
+
+  const toggleContent = (cityName: string) => {
+    sendRequestToServer(cityName); // Send the request with the city name
     setShowContent(!showContent); // Toggle the content visibility
   };
   return (
@@ -242,7 +270,10 @@ function Header1() {
                   <p>Feels like:{cityInfo.feels}°C</p>
                   <p>Speed: {cityInfo.speed}km/h</p>
                 </div>
-                <button className="Main_btn" onClick={toggleContent}>
+                <button
+                  className="Main_btn"
+                  onClick={() => toggleContent(cityInfo.city)}
+                >
                   .!.
                 </button>
               </div>
