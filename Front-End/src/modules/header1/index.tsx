@@ -2,53 +2,14 @@ import { ChangeEvent, useEffect, useState } from "react";
 import Button from "../../components/Button";
 import { getToken } from "../register/token"; // Путь к файлу api.ts
 import { useCity } from "../../components/CityContext";
-const [temperature, setTemperature] = useState(null);
-function Lox() {
-  const [token, setToken] = useState<string | null>("");
-  useEffect(() => {
-    getToken().then((token) => {
-      if (token) {
-        setToken(token);
-      }
-    });
-  }, []);
-  var data = new URLSearchParams();
-  data.append("username", "ilya");
-  data.append("password", "123");
-  const jsessionId = localStorage.getItem("jsessionid");
-  const { city } = useCity();
-  // Ваш fetch запрос
-  useEffect(() => {
-    console.log("город" + city); // Добавьте эту строку для проверки, меняется ли 'city'
-    if (city) {
-      fetch(`http://localhost:8080/getCurrentWeather?city=${city}`, {
-        method: "GET",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error("Network response was not ok");
-          }
-          return response.json();
-        })
-        .then((data) => {
-          const temp = data.main.temp;
-          setTemperature(temp); // Сохраняем значение температуры в состоянии компонента
-        })
-        .catch((error) => {
-          console.error("Ошибка при запросе данных:", error);
-          // Дополнительная обработка ошибок
-        });
-    }
-  }, [city]);
-}
+
 function Header1() {
   const [blocks, setBlocks] = useState<number[]>([]);
   const [token, setToken] = useState<string | null>("");
+  const [temperature, setTemperature] = useState<number | null>(null); // State for temperature
+  const [inputCity, setInputCity] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
     getToken().then((token) => {
       if (token) {
@@ -56,13 +17,13 @@ function Header1() {
       }
     });
   }, []);
-  const [inputCity, setInputCity] = useState("");
-  const [isLoading, setIsLoading] = useState(false); // Добавьте состояние для отслеживания загрузки
 
   const handleCityChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInputCity(e.target.value);
   };
+
   const { city, setCity } = useCity();
+
   const handleFetchWeather = async () => {
     const addBlock = () => {
       if (blocks.length < 6) {
@@ -70,6 +31,7 @@ function Header1() {
       }
     };
     addBlock();
+
     if (inputCity) {
       setIsLoading(true);
       try {
@@ -91,18 +53,19 @@ function Header1() {
         const data = await response.json();
 
         if (setCity) {
-          setCity(inputCity); // Проверьте, что setCity существует
+          setCity(inputCity);
         }
 
-        // Другие действия по обработке данных
+        setTemperature(data.main.temp); // Set the temperature state
+
+        // Other data processing actions
       } catch (error) {
-        // Обработка ошибок
+        // Error handling
       } finally {
         setIsLoading(false);
       }
     }
   };
-  Lox();
   const [isMoved, setIsMoved] = useState(false);
   const [isLightMode, setIsLightMode] = useState(true);
   const changeBlockColor = () => {
