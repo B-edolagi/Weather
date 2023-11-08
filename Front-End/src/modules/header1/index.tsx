@@ -5,7 +5,12 @@ import { useCity } from "../../components/CityContext";
 
 function Header1() {
   const [cityData, setCityData] = useState<
-    { city: string; temperature: number | null }[]
+    {
+      city: string;
+      temperature: number | null;
+      temp_max: number | null;
+      temp_min: number | null;
+    }[]
   >([]);
   const [token, setToken] = useState<string | null>("");
   const [inputCity, setInputCity] = useState("");
@@ -50,7 +55,12 @@ function Header1() {
           setCity(inputCity);
         }
 
-        const newCityData = { city: inputCity, temperature: data.main.temp };
+        const newCityData = {
+          city: inputCity,
+          temperature: data.main.temp,
+          temp_max: data.main.temp_max,
+          temp_min: data.main.temp_min,
+        };
         setCityData([...cityData, newCityData]);
 
         // Other data processing actions
@@ -189,7 +199,12 @@ function Header1() {
       <section>
         {cityData.map((cityInfo, index) => (
           <div key={index}>
-            City: {cityInfo.city}, Temperature: {cityInfo.temperature} content
+            <h1>{cityInfo.city}</h1>
+            <h2>Tempreature:{cityInfo.temperature}°C</h2>
+            <div className="blocks_flex">
+              <p>Maximum today:{cityInfo.temp_max}°C</p>
+              <p>Minimum today:{cityInfo.temp_min}°C</p>
+            </div>
           </div>
         ))}
       </section>
