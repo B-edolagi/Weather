@@ -3,7 +3,7 @@ import Header from "../header/Header";
 import SectionMain from "../section_main/section_main";
 import SectionSecond from "../section_second/section_second";
 import Footer from "../footer/footer";
-import Blocks from "../fff";
+import Header1 from "../header1";
 
 interface User {
   username: string;
@@ -75,8 +75,7 @@ const LoginScreen: React.FC = () => {
     <div>
       {loggedIn ? (
         <div>
-          <Header />
-          <Blocks />
+          <Header1 />
         </div>
       ) : (
         <div className="container__login">
