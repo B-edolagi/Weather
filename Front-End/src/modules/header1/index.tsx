@@ -207,7 +207,11 @@ function Header1() {
       <section className="section">
         <div className="section_wrap">
           {cityData.map((cityInfo, index) => (
-            <div key={index} className="section_div" id="timeSection">
+            <div
+              key={index}
+              className="section_div"
+              id={`timeSection-${index}`}
+            >
               <h1>
                 {cityInfo.city.charAt(0).toUpperCase() + cityInfo.city.slice(1)}
               </h1>
@@ -219,9 +223,15 @@ function Header1() {
                 height="156px"
               />
               <div className="blocks_flex">
-                <h2 id="paragraph">Tempreature:{cityInfo.temperature}°C</h2>
-                <p id="paragraph">Feels like:{cityInfo.feels}°C</p>
-                <p id="paragraph">Speed: {cityInfo.speed}km/h</p>
+                <h2 id={`paragraph-${index}`}>
+                  Tempreature:{cityInfo.temperature}°C
+                </h2>
+                <p id={`paragraph-feels-${index}`}>
+                  Feels like:{cityInfo.feels}°C
+                </p>
+                <p id={`paragraph-speed-${index}`}>
+                  Speed: {cityInfo.speed}km/h
+                </p>
               </div>
             </div>
           ))}
