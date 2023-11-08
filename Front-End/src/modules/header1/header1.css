@@ -153,10 +153,28 @@ input::placeholder {
 .section_div {
     padding: 20px 25px;
     border-radius: 30px;
-    background-color: bisque;
+    background-color: #ffffffd0;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-flow: column;
     gap: 10px;
+}
+
+.section_div h1 {
+    font-size: 24px;
+    font-weight: 700;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.blocks_flex h2 {
+    font-size: 18px;
+    font-weight: 700;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.blocks_flex p {
+    font-size: 18px;
+    font-weight: 700;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }

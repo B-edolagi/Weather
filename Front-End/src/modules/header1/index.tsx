@@ -208,11 +208,13 @@ function Header1() {
             <img
               src={"./src/assets/" + cityInfo.weatherIcon + ".png"}
               alt="Weather Icon"
+              width="156px"
+              height="156px"
             />
             <div className="blocks_flex">
-              <h2>Tempreature:{cityInfo.temperature}°C</h2>
-              <p>Feels like:{cityInfo.feels}°C</p>
-              <p>Speed: {cityInfo.speed}km/h</p>
+              <h2 id="h2">Tempreature:{cityInfo.temperature}°C</h2>
+              <p id="paragraph">Feels like:{cityInfo.feels}°C</p>
+              <p id="paragraph">Speed: {cityInfo.speed}km/h</p>
             </div>
           </div>
         ))}
