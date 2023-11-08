@@ -57,7 +57,7 @@ const LoginScreen: React.FC = () => {
       // По истечении 3 секунд показываем остальной контент
       setTimeout(() => {
         setShowContent(true);
-      }, 1000);
+      }, 0);
     }
   };
 
@@ -130,7 +130,7 @@ const LoginScreen: React.FC = () => {
                     // Задержка в 4 секунды
                     setTimeout(() => {
                       handleLogin(event); // Передаем event в функцию handleLogin
-                    }, 5000); // 4000 миллисекунд (4 секунды)
+                    }, 0); // 4000 миллисекунд (4 секунды)
                   }}
                 >
                   LOGIN
