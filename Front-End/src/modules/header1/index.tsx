@@ -58,8 +58,8 @@ function Header1() {
         const newCityData = {
           city: inputCity,
           temperature: data.main.temp,
-          temp_max: data.main.temp_max,
-          temp_min: data.main.temp_min,
+          temp_max: Math.round(data.main.temp_max),
+          temp_min: Math.round(data.main.temp_min),
         };
         setCityData([...cityData, newCityData]);
 
