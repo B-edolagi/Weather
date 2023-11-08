@@ -200,7 +200,7 @@ function Header1() {
       </header>
       <section className="section">
         {cityData.map((cityInfo, index) => (
-          <div key={index} className="section_div">
+          <div key={index} className="section_div" id="timeSection">
             <h1>
               {cityInfo.city.charAt(0).toUpperCase() + cityInfo.city.slice(1)}
             </h1>
