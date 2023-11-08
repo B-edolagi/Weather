@@ -175,17 +175,11 @@ function Header1() {
     }
   };
   const sendRequestToServer = (cityName: string) => {
-    useEffect(() => {
-      getToken().then((token) => {
-        if (token) {
-          setToken(token);
-        }
-      });
-    }, []);
+    if (!token) {
+      // Log an error or handle the case where the token is missing
+      return console.log("lox");
+    }
 
-    // Send a request to the server with the provided city name
-    // You can use the fetch or axios library for making the API request
-    // Replace the URL and request parameters with your actual server API
     fetch(`http://localhost:8080/getCurrentWeather?city=${cityName}`, {
       method: "GET",
       credentials: "include",
@@ -202,7 +196,6 @@ function Header1() {
       })
       .then((data) => {
         // Process the server response here
-        // You can update the state or perform other actions
       })
       .catch((error) => {
         // Handle errors
