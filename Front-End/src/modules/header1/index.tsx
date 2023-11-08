@@ -209,8 +209,9 @@ function Header1() {
           {cityData.map((cityInfo, index) => (
             <div
               key={index}
-              className="section_div"
-              id={`timeSection-${index}`}
+              className={`section_div ${
+                isLightMode ? "light-mode" : "dark-mode"
+              }`}
             >
               <h1>
                 {cityInfo.city.charAt(0).toUpperCase() + cityInfo.city.slice(1)}
@@ -223,13 +224,9 @@ function Header1() {
                 height="156px"
               />
               <div className="blocks_flex">
-                <h2 id={`paragraph-${index}`}>
-                  Tempreature:{cityInfo.temperature}°C
-                </h2>
-                <p id={`paragraph${index}`}>Feels like:{cityInfo.feels}°C</p>
-                <p id={`paragraph-speed-${index}`}>
-                  Speed: {cityInfo.speed}km/h
-                </p>
+                <h2>Tempreature:{cityInfo.temperature}°C</h2>
+                <p>Feels like:{cityInfo.feels}°C</p>
+                <p>Speed: {cityInfo.speed}km/h</p>
               </div>
             </div>
           ))}
