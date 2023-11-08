@@ -10,6 +10,7 @@ function Header1() {
       temperature: number | null;
       temp_max: number | null;
       temp_min: number | null;
+      weatherIcon: string;
     }[]
   >([]);
   const [token, setToken] = useState<string | null>("");
@@ -60,6 +61,7 @@ function Header1() {
           temperature: data.main.temp,
           temp_max: Math.round(data.main.temp_max),
           temp_min: Math.round(data.main.temp_min),
+          weatherIcon: data.weather[0].main,
         };
         setCityData([...cityData, newCityData]);
 
@@ -202,8 +204,7 @@ function Header1() {
             <h1>{cityInfo.city}</h1>
             <h2>Tempreature:{cityInfo.temperature}°C</h2>
             <div className="blocks_flex">
-              <p>Maximum today:{cityInfo.temp_max}°C</p>
-              <p>Minimum today:{cityInfo.temp_min}°C</p>
+              <img src={cityInfo.weatherIcon} alt="Weather Icon" />
             </div>
           </div>
         ))}

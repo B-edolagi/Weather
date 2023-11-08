@@ -127,12 +127,7 @@ function Today() {
       </div>
       <div className="Today_weather">
         {/* {weather} */}
-        <img
-          src="./src/assets/Clear.png"
-          alt="weaher"
-          width="250px"
-          height="250px"
-        />
+        <img src={weather} alt="weaher" width="250px" height="250px" />
         <h2 id="ChangeColor">{txt}</h2> {/*   Information about weather */}{" "}
         {/* {txt}*/}
       </div>
