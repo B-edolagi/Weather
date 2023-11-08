@@ -178,7 +178,7 @@ function Header1() {
     // Send a request to the server with the provided city name
     // You can use the fetch or axios library for making the API request
     // Replace the URL and request parameters with your actual server API
-    fetch(`http://your-server-url.com/api/endpoint?city=${cityName}`, {
+    fetch(`http://localhost:8080/getCurrentWeather?city=${cityName}`, {
       method: "GET",
       credentials: "include",
       headers: {
