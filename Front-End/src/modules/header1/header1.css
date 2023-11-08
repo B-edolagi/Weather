@@ -143,3 +143,20 @@ input::placeholder {
     background-color: rgb(0, 0, 0);
     /* Измените значение, чтобы кнопка двигалась вправо */
 }
+
+.section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.section_div {
+    padding: 20px 25px;
+    border-radius: 30px;
+    background-color: bisque;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+    gap: 10px;
+}

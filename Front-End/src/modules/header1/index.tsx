@@ -10,6 +10,7 @@ function Header1() {
       temperature: number | null;
       weatherIcon: string;
       speed: number | null;
+      feels: number | null;
     }[]
   >([]);
   const [token, setToken] = useState<string | null>("");
@@ -60,6 +61,7 @@ function Header1() {
           temperature: data.main.temp,
           weatherIcon: data.weather[0].main,
           speed: Math.round(data.wind.speed),
+          feels: data.main.fells_like,
         };
         setCityData([...cityData, newCityData]);
 
@@ -196,16 +198,20 @@ function Header1() {
           </>
         </div>
       </header>
-      <section>
+      <section className="section">
         {cityData.map((cityInfo, index) => (
-          <div key={index}>
-            <h1>{cityInfo.city}</h1>
+          <div key={index} className="section_div">
+            <h1>
+              {cityInfo.city.charAt(0).toUpperCase() + cityInfo.city.slice(1)}
+            </h1>
+
             <img
               src={"./src/assets/" + cityInfo.weatherIcon + ".png"}
               alt="Weather Icon"
             />
             <div className="blocks_flex">
               <h2>Tempreature:{cityInfo.temperature}°C</h2>
+              <p>Feels like:{cityInfo.feels}°C</p>
               <p>Speed: {cityInfo.speed}km/h</p>
             </div>
           </div>
