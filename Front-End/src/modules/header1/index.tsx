@@ -238,16 +238,16 @@ function Header1() {
               <button className="Main_btn" onClick={toggleContent}>
                 .!.
               </button>
-              {showContent && (
-                <>
-                  <SectionMain />
-                  <SectionSecond />
-                </>
-              )}
             </div>
           ))}
         </div>
       </section>
+      {showContent ? (
+        <>
+          <SectionMain /> {/* Add your Section_Main component here */}
+          <SectionSecond /> {/* Add your Section_Today component here */}
+        </>
+      ) : null}
     </>
   );
 }
