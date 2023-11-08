@@ -4,7 +4,6 @@ import { getToken } from "../register/token"; // Путь к файлу api.ts
 import { useCity } from "../../components/CityContext";
 
 function Header1() {
-  const [temperature, setTemperature] = useState(null);
   const [blocks, setBlocks] = useState<number[]>([]);
   const [token, setToken] = useState<string | null>("");
   useEffect(() => {
@@ -16,7 +15,7 @@ function Header1() {
   }, []);
   const [inputCity, setInputCity] = useState("");
   const [isLoading, setIsLoading] = useState(false); // Добавьте состояние для отслеживания загрузки
-
+  const [temperature, setTemperature] = useState(null);
   const handleCityChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInputCity(e.target.value);
   };
