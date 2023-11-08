@@ -212,7 +212,7 @@ function Header1() {
               height="156px"
             />
             <div className="blocks_flex">
-              <h2 id="h2">Tempreature:{cityInfo.temperature}°C</h2>
+              <h2 id="paragraph">Tempreature:{cityInfo.temperature}°C</h2>
               <p id="paragraph">Feels like:{cityInfo.feels}°C</p>
               <p id="paragraph">Speed: {cityInfo.speed}km/h</p>
             </div>
