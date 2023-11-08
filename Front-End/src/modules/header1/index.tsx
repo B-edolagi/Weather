@@ -175,6 +175,14 @@ function Header1() {
     }
   };
   const sendRequestToServer = (cityName: string) => {
+    useEffect(() => {
+      getToken().then((token) => {
+        if (token) {
+          setToken(token);
+        }
+      });
+    }, []);
+
     // Send a request to the server with the provided city name
     // You can use the fetch or axios library for making the API request
     // Replace the URL and request parameters with your actual server API
