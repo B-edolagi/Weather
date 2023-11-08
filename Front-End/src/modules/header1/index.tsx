@@ -4,9 +4,10 @@ import { getToken } from "../register/token"; // Путь к файлу api.ts
 import { useCity } from "../../components/CityContext";
 
 function Header1() {
-  const [blocks, setBlocks] = useState<number[]>([]);
+  const [cityData, setCityData] = useState<
+    { city: string; temperature: number | null }[]
+  >([]);
   const [token, setToken] = useState<string | null>("");
-  const [temperature, setTemperature] = useState<number | null>(null); // State for temperature
   const [inputCity, setInputCity] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -25,13 +26,6 @@ function Header1() {
   const { city, setCity } = useCity();
 
   const handleFetchWeather = async () => {
-    const addBlock = () => {
-      if (blocks.length < 6) {
-        setBlocks([...blocks, blocks.length + 1]);
-      }
-    };
-    addBlock();
-
     if (inputCity) {
       setIsLoading(true);
       try {
@@ -56,7 +50,8 @@ function Header1() {
           setCity(inputCity);
         }
 
-        setTemperature(data.main.temp); // Set the temperature state
+        const newCityData = { city: inputCity, temperature: data.main.temp };
+        setCityData([...cityData, newCityData]);
 
         // Other data processing actions
       } catch (error) {
@@ -66,6 +61,7 @@ function Header1() {
       }
     }
   };
+
   const [isMoved, setIsMoved] = useState(false);
   const [isLightMode, setIsLightMode] = useState(true);
   const changeBlockColor = () => {
@@ -191,8 +187,10 @@ function Header1() {
         </div>
       </header>
       <section>
-        {blocks.map((blockNumber) => (
-          <div key={blockNumber}>Block {temperature} content</div>
+        {cityData.map((cityInfo, index) => (
+          <div key={index}>
+            City: {cityInfo.city}, Temperature: {cityInfo.temperature} content
+          </div>
         ))}
       </section>
     </>
