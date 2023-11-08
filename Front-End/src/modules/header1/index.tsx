@@ -16,7 +16,7 @@ function Header1() {
   const [token, setToken] = useState<string | null>("");
   const [inputCity, setInputCity] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-
+  const [blockCounter, setBlockCounter] = useState(0);
   useEffect(() => {
     getToken().then((token) => {
       if (token) {
@@ -63,7 +63,13 @@ function Header1() {
           speed: Math.round(data.wind.speed),
           feels: data.main.feels_like,
         };
-        setCityData([...cityData, newCityData]);
+        if (blockCounter < 8) {
+          setCityData([...cityData, newCityData]);
+          setBlockCounter(blockCounter + 1);
+        } else {
+          // Handle the case where the maximum number of blocks is reached.
+          // You can show an alert or take any other appropriate action.
+        }
 
         // Other data processing actions
       } catch (error) {
