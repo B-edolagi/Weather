@@ -211,43 +211,45 @@ function Header1() {
           </>
         </div>
       </header>
-      <section className="section">
-        <div className="section_wrap">
-          {cityData.map((cityInfo, index) => (
-            <div
-              key={index}
-              className={`section_div ${
-                isLightMode ? "light-mode" : "dark-mode"
-              }`}
-            >
-              <h1>
-                {cityInfo.city.charAt(0).toUpperCase() + cityInfo.city.slice(1)}
-              </h1>
-
-              <img
-                src={"./src/assets/" + cityInfo.weatherIcon + ".png"}
-                alt="Weather Icon"
-                width="156px"
-                height="156px"
-              />
-              <div className="blocks_flex">
-                <h2>Tempreature:{cityInfo.temperature}°C</h2>
-                <p>Feels like:{cityInfo.feels}°C</p>
-                <p>Speed: {cityInfo.speed}km/h</p>
-              </div>
-              <button className="Main_btn" onClick={toggleContent}>
-                .!.
-              </button>
-            </div>
-          ))}
-        </div>
-      </section>
       {showContent ? (
         <>
-          <SectionMain /> {/* Add your Section_Main component here */}
-          <SectionSecond /> {/* Add your Section_Today component here */}
+          <SectionMain /> {/* Display SectionMain component */}
+          <SectionSecond /> {/* Display SectionToday component */}
         </>
-      ) : null}
+      ) : (
+        <section className="section">
+          <div className="section_wrap">
+            {cityData.map((cityInfo, index) => (
+              <div
+                key={index}
+                className={`section_div ${
+                  isLightMode ? "light-mode" : "dark-mode"
+                }`}
+              >
+                <h1>
+                  {cityInfo.city.charAt(0).toUpperCase() +
+                    cityInfo.city.slice(1)}
+                </h1>
+
+                <img
+                  src={"./src/assets/" + cityInfo.weatherIcon + ".png"}
+                  alt="Weather Icon"
+                  width="156px"
+                  height="156px"
+                />
+                <div className="blocks_flex">
+                  <h2>Tempreature:{cityInfo.temperature}°C</h2>
+                  <p>Feels like:{cityInfo.feels}°C</p>
+                  <p>Speed: {cityInfo.speed}km/h</p>
+                </div>
+                <button className="Main_btn" onClick={toggleContent}>
+                  .!.
+                </button>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
     </>
   );
 }
