@@ -61,7 +61,7 @@ function Header1() {
           temperature: data.main.temp,
           weatherIcon: data.weather[0].main,
           speed: Math.round(data.wind.speed),
-          feels: data.main.fells_like,
+          feels: data.main.feels_like,
         };
         setCityData([...cityData, newCityData]);
 
