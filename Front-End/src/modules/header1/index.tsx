@@ -7,7 +7,7 @@ import SectionSecond from "../section_second/section_second";
 
 function Header1() {
   const [showContent, setShowContent] = useState(false); // State variable to control content visibility
-
+  const [token, setToken] = useState<string | null>("");
   const [cityData, setCityData] = useState<
     {
       city: string;
@@ -17,7 +17,6 @@ function Header1() {
       feels: number | null;
     }[]
   >([]);
-  const [token, setToken] = useState<string | null>("");
   const [inputCity, setInputCity] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [blockCounter, setBlockCounter] = useState(0);
@@ -176,26 +175,22 @@ function Header1() {
   };
   const sendRequestToServer = (cityName: string) => {
     if (!token) {
-      // Log an error or handle the case where the token is missing
-      return console.log("lox");
+      // Handle the case where the token is missing or empty
+      return;
     }
+
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    };
 
     fetch(`http://localhost:8080/getCurrentWeather?city=${cityName}`, {
       method: "GET",
       credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
+      headers,
     })
       .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        // Process the server response here
+        // ... Your response handling code ...
       })
       .catch((error) => {
         // Handle errors
