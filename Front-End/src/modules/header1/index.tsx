@@ -2,8 +2,12 @@ import { ChangeEvent, useEffect, useState } from "react";
 import Button from "../../components/Button";
 import { getToken } from "../register/token"; // Путь к файлу api.ts
 import { useCity } from "../../components/CityContext";
+import SectionMain from "../section_main/section_main";
+import SectionSecond from "../section_second/section_second";
 
 function Header1() {
+  const [showContent, setShowContent] = useState(false); // State variable to control content visibility
+
   const [cityData, setCityData] = useState<
     {
       city: string;
@@ -17,7 +21,6 @@ function Header1() {
   const [inputCity, setInputCity] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [blockCounter, setBlockCounter] = useState(0);
-
   useEffect(() => {
     getToken().then((token) => {
       if (token) {
@@ -171,6 +174,9 @@ function Header1() {
       }
     }
   };
+  const toggleContent = () => {
+    setShowContent(!showContent); // Toggle the content visibility
+  };
   return (
     <>
       <header>
@@ -229,7 +235,15 @@ function Header1() {
                 <p>Feels like:{cityInfo.feels}°C</p>
                 <p>Speed: {cityInfo.speed}km/h</p>
               </div>
-              <button className="Main_btn">.!.</button>
+              <button className="Main_btn" onClick={toggleContent}>
+                .!.
+              </button>
+              {showContent && (
+                <>
+                  <SectionMain />
+                  <SectionSecond />
+                </>
+              )}
             </div>
           ))}
         </div>
