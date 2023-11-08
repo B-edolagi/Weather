@@ -173,7 +173,16 @@ function Header1() {
       }
     }
   };
+  useEffect(() => {
+    getToken().then((token) => {
+      if (token) {
+        setToken(token);
+        console.log("Token set:", token);
+      }
+    });
+  }, []);
   const sendRequestToServer = (cityName: string) => {
+    console.log("Token before request:", token);
     if (!token) {
       // Handle the case where the token is missing or empty
       return;
