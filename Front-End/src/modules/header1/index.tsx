@@ -204,7 +204,10 @@ function Header1() {
             <h1>{cityInfo.city}</h1>
             <h2>Tempreature:{cityInfo.temperature}°C</h2>
             <div className="blocks_flex">
-              <img src={cityInfo.weatherIcon} alt="Weather Icon" />
+              <img
+                src={"./src/assets/" + cityInfo.weatherIcon + ".png"}
+                alt="Weather Icon"
+              />
             </div>
           </div>
         ))}
