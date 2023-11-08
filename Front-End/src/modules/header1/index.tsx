@@ -8,9 +8,8 @@ function Header1() {
     {
       city: string;
       temperature: number | null;
-      temp_max: number | null;
-      temp_min: number | null;
       weatherIcon: string;
+      speed: number | null;
     }[]
   >([]);
   const [token, setToken] = useState<string | null>("");
@@ -59,9 +58,8 @@ function Header1() {
         const newCityData = {
           city: inputCity,
           temperature: data.main.temp,
-          temp_max: Math.round(data.main.temp_max),
-          temp_min: Math.round(data.main.temp_min),
           weatherIcon: data.weather[0].main,
+          speed: Math.round(data.wind.speed),
         };
         setCityData([...cityData, newCityData]);
 
@@ -202,12 +200,13 @@ function Header1() {
         {cityData.map((cityInfo, index) => (
           <div key={index}>
             <h1>{cityInfo.city}</h1>
-            <h2>Tempreature:{cityInfo.temperature}°C</h2>
+            <img
+              src={"./src/assets/" + cityInfo.weatherIcon + ".png"}
+              alt="Weather Icon"
+            />
             <div className="blocks_flex">
-              <img
-                src={"./src/assets/" + cityInfo.weatherIcon + ".png"}
-                alt="Weather Icon"
-              />
+              <h2>Tempreature:{cityInfo.temperature}°C</h2>
+              <p>Speed: {cityInfo.speed}km/h</p>
             </div>
           </div>
         ))}
