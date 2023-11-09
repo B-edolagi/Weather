@@ -78,7 +78,7 @@ function Forecast() {
     console.log("город" + city);
     console.log(token); // Move the console.log inside this useEffect
     if (city && token !== "") {
-      fetch(`http://localhost:8080/getCurrentWeather?city=${city}`, {
+      fetch(`http://localhost:8080/getDailytWeather?city=${city}`, {
         method: "GET",
         credentials: "include",
         headers: {
