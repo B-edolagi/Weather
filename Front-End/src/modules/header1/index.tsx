@@ -235,7 +235,6 @@ function Header1() {
         <>
           <Section_Time />
           <Section_Today />
-          {/* Display SectionMain component */}
           <SectionSecond /> {/* Display SectionToday component */}
         </>
       ) : (

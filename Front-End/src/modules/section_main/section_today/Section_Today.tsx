@@ -28,6 +28,7 @@ function Today() {
   // Ваш fetch запрос
   useEffect(() => {
     console.log("город" + city); // Добавьте эту строку для проверки, меняется ли 'city'
+    console.log(token);
     if (city) {
       fetch(`http://localhost:8080/getCurrentWeather?city=${city}`, {
         method: "GET",
