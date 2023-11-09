@@ -126,22 +126,51 @@ function Forecast() {
         5 Days Forecast:
       </h2>
       <div className="Forecast_inf">
-        {formattedDates1.map((formattedDate, index) => (
-          <div key={index} className="Forecast_inf_title">
-            <img
-              src={`./src/assets/${index + 1}.png`}
-              alt={`photo${index + 1}`}
-              width="60px"
-              height="60px"
-            />
-            <p className="Forecast_inf_title_p" id="ChangeColor">
-              {date1 !== null ? date1 : "Loading..."}°C
-            </p>
-            <p className="Forecast_inf_title_day" id="ChangeColor">
-              {formattedDate}
-            </p>
-          </div>
-        ))}
+        <div className="Forecast_inf_title">
+          <img src={w12} alt="photo1" width="60px" height="60px" />
+          <p className="Forecast_inf_title_p" id="ChangeColor">
+            {date1 !== null ? date1 : "Loading..."}°C
+          </p>
+          <p className="Forecast_inf_title_day" id="ChangeColor">
+            {formattedDates1[0]}
+          </p>
+        </div>
+        <div className="Forecast_inf_title">
+          <img src={w15} alt="photo2" width="60px" height="60px" />
+          <p className="Forecast_inf_title_p" id="ChangeColor">
+            {date2}°C
+          </p>
+          <p className="Forecast_inf_title_day" id="ChangeColor">
+            {formattedDates1[1]}
+          </p>
+        </div>
+        <div className="Forecast_inf_title">
+          <img src={w18} alt="photo3" width="60px" height="60px" />
+          <p className="Forecast_inf_title_p" id="ChangeColor">
+            {date3}°C
+          </p>
+          <p className="Forecast_inf_title_day" id="ChangeColor">
+            {formattedDates1[2]}
+          </p>
+        </div>
+        <div className="Forecast_inf_title">
+          <img src={w21} alt="photo4" width="60px" height="60px" />
+          <p className="Forecast_inf_title_p" id="ChangeColor">
+            {date4}°C
+          </p>
+          <p className="Forecast_inf_title_day" id="ChangeColor">
+            {formattedDates1[3]}
+          </p>
+        </div>
+        <div className="Forecast_inf_title">
+          <img src={w00} alt="photo5" width="60px" height="60px" />
+          <p className="Forecast_inf_title_p" id="ChangeColor">
+            {date5}°C
+          </p>
+          <p className="Forecast_inf_title_day" id="ChangeColor">
+            {formattedDates1[4]}
+          </p>
+        </div>
       </div>
     </div>
   );

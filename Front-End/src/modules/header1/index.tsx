@@ -182,7 +182,7 @@ function Header1() {
         setShowContent(!showContent);
         console.log(`lox = ${token}`);
         const response = await fetch(
-          `http://localhost:8080/getCurrentWeather?city=${cityName}`,
+          `http://localhost:8080/getDailyWeather?city=${cityName}`,
           {
             method: "GET",
             credentials: "include",
