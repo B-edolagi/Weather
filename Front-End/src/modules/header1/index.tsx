@@ -174,14 +174,6 @@ function Header1() {
     }
   };
   const toggleContent = () => {
-    useEffect(() => {
-      getToken().then((token) => {
-        if (token) {
-          setToken(token);
-          console.log("Token set:", token);
-        }
-      });
-    }, []);
     const l = {
       cityName: String,
     };
