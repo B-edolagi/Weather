@@ -207,6 +207,14 @@ function Header1() {
       });
   };
 
+  const toggleContent = (cityName: string) => {
+    sendRequestToServer(cityName); // Send the request with the city name
+    setShowContent(!showContent); // Toggle the content visibility
+  };
+  const handleClick = () => {
+    toggleContent;
+    sendRequestToServer;
+  };
   return (
     <>
       <header>
@@ -272,10 +280,7 @@ function Header1() {
                   <p>Feels like:{cityInfo.feels}°C</p>
                   <p>Speed: {cityInfo.speed}km/h</p>
                 </div>
-                <button
-                  className="Main_btn"
-                  onClick={() => sendRequestToServer}
-                >
+                <button className="Main_btn" onClick={handleClick}>
                   .!.
                 </button>
               </div>
