@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { getToken } from "../../register/token"; // Путь к файлу api.ts
 import { useCity } from "../../../components/CityContext";
+import { token, setToken } from "../../header1";
 function Today() {
-  const [token, setToken] = useState<string | null>("");
   useEffect(() => {
     getToken().then((token) => {
       if (token) {
@@ -35,7 +35,7 @@ function Today() {
         credentials: "include",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${{ token }}`,
         },
       })
         .then((response) => {

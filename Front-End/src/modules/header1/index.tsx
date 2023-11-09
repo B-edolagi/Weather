@@ -4,10 +4,9 @@ import { getToken } from "../register/token"; // Путь к файлу api.ts
 import { useCity } from "../../components/CityContext";
 import SectionMain from "../section_main/section_main";
 import SectionSecond from "../section_second/section_second";
-
+export const [token, setToken] = useState<string | null>("");
 function Header1() {
   const [showContent, setShowContent] = useState(false); // State variable to control content visibility
-  const [token, setToken] = useState<string | null>("");
   const [cityData, setCityData] = useState<
     {
       city: string;
