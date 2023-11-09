@@ -75,9 +75,10 @@ function Forecast() {
   const [w21, setW21] = useState<string | undefined>("");
   const [w00, setW00] = useState<string | undefined>("");
   useEffect(() => {
-    console.log("город" + city); // Добавьте эту строку для проверки, меняется ли 'city'
-    if (city) {
-      fetch(`http://localhost:8080/getDailyWeather?city=${city}`, {
+    console.log("город" + city);
+    console.log(token); // Move the console.log inside this useEffect
+    if (city && token !== "") {
+      fetch(`http://localhost:8080/getCurrentWeather?city=${city}`, {
         method: "GET",
         credentials: "include",
         headers: {
@@ -118,7 +119,7 @@ function Forecast() {
           // Дополнительная обработка ошибок
         });
     }
-  }, [city]);
+  }, [city, token]);
   return (
     <div className="Forecast" id="Forecast">
       <h2 className="Forecast_Name" id="ChangeColor">
