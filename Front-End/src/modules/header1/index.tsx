@@ -206,7 +206,7 @@ function Header1() {
       });
   };
 
-  const toggleContent = (cityName: string) => {
+  const toggleContent = () => {
     setShowContent(!showContent); // Toggle the content visibility
   };
   return (
@@ -274,7 +274,7 @@ function Header1() {
                   <p>Feels like:{cityInfo.feels}°C</p>
                   <p>Speed: {cityInfo.speed}km/h</p>
                 </div>
-                <button className="Main_btn" onClick={() => toggleContent}>
+                <button className="Main_btn" onClick={toggleContent}>
                   .!.
                 </button>
               </div>
