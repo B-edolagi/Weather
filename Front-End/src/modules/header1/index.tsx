@@ -280,7 +280,13 @@ function Header1() {
                   <p>Feels like:{cityInfo.feels}°C</p>
                   <p>Speed: {cityInfo.speed}km/h</p>
                 </div>
-                <button className="Main_btn" onClick={handleClick}>
+                <button
+                  className="Main_btn"
+                  onClick={() => {
+                    toggleContent(cityInfo.city);
+                    sendRequestToServer;
+                  }}
+                >
                   .!.
                 </button>
               </div>
