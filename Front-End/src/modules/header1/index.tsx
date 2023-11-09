@@ -174,13 +174,18 @@ function Header1() {
     }
   };
   const toggleContent = () => {
+    getToken().then((token) => {
+      if (token) {
+        setToken(token);
+      }
+    });
     const l = {
       cityName: String,
     };
     setShowContent(!showContent); // Toggle the content visibility
     console.log("Token before request:", token);
 
-    fetch(`http://localhost:8080/getCurrentWeather?city=${city}`, {
+    fetch(`http://localhost:8080/getCurrentWeather?city=${l.cityName}`, {
       method: "GET",
       credentials: "include",
       headers: {
