@@ -76,7 +76,7 @@ function Forecast() {
   const [w00, setW00] = useState<string | undefined>("");
   useEffect(() => {
     console.log("город" + city);
-    console.log(token); // Move the console.log inside this useEffect
+    console.log("daun" + token); // Move the console.log inside this useEffect
     if (city && token !== "") {
       fetch(`http://localhost:8080/getDailytWeather?city=${city}`, {
         method: "GET",
