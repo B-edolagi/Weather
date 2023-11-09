@@ -184,7 +184,7 @@ function Header1() {
         };
 
         setShowContent(!showContent);
-
+        console.log(`lox = ${token}`);
         const response = await fetch(
           `http://localhost:8080/getCurrentWeather?city=${l.cityName}`,
           {
