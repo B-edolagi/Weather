@@ -181,7 +181,11 @@ function Header1() {
       }
     });
   }, []);
-  const sendRequestToServer = (cityName: string) => {
+  const toggleContent = () => {
+    const l = {
+      cityName: String,
+    };
+    setShowContent(!showContent); // Toggle the content visibility
     console.log("Token before request:", token);
     if (!token) {
       // Handle the case where the token is missing or empty
@@ -193,7 +197,7 @@ function Header1() {
       Authorization: `Bearer ${token}`,
     };
 
-    fetch(`http://localhost:8080/getCurrentWeather?city=${cityName}`, {
+    fetch(`http://localhost:8080/getCurrentWeather?city=${l.cityName}`, {
       method: "GET",
       credentials: "include",
       headers,
@@ -204,14 +208,6 @@ function Header1() {
       .catch((error) => {
         // Handle errors
       });
-  };
-
-  const toggleContent = () => {
-    setShowContent(!showContent); // Toggle the content visibility
-  };
-  const lox = () => {
-    toggleContent;
-    sendRequestToServer;
   };
   return (
     <>
@@ -278,7 +274,7 @@ function Header1() {
                   <p>Feels like:{cityInfo.feels}°C</p>
                   <p>Speed: {cityInfo.speed}km/h</p>
                 </div>
-                <button className="Main_btn" onClick={lox}>
+                <button className="Main_btn" onClick={toggleContent}>
                   .!.
                 </button>
               </div>
