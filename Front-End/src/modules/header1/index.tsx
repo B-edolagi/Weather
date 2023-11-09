@@ -187,8 +187,7 @@ function Header1() {
       // Handle the case where the token is missing or empty
       return;
     }
-    sendRequestToServer(cityName); // Send the request with the city name
-    setShowContent(!showContent); // Toggle the content visibility
+
     const headers = {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
@@ -208,12 +207,7 @@ function Header1() {
   };
 
   const toggleContent = (cityName: string) => {
-    sendRequestToServer(cityName); // Send the request with the city name
     setShowContent(!showContent); // Toggle the content visibility
-  };
-  const handleClick = () => {
-    toggleContent;
-    sendRequestToServer;
   };
   return (
     <>
@@ -280,10 +274,7 @@ function Header1() {
                   <p>Feels like:{cityInfo.feels}°C</p>
                   <p>Speed: {cityInfo.speed}km/h</p>
                 </div>
-                <button
-                  className="Main_btn"
-                  onClick={() => toggleContent(cityInfo.city)}
-                >
+                <button className="Main_btn" onClick={() => toggleContent}>
                   .!.
                 </button>
               </div>
