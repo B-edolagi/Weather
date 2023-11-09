@@ -173,20 +173,16 @@ function Header1() {
       }
     }
   };
-  const toggleContent = async () => {
+  const toggleContent = async (cityName: string) => {
     try {
       const token = await getToken();
       if (token) {
         setToken(token);
 
-        const l = {
-          cityName: String,
-        };
-
         setShowContent(!showContent);
         console.log(`lox = ${token}`);
         const response = await fetch(
-          `http://localhost:8080/getCurrentWeather?city=${l.cityName}`,
+          `http://localhost:8080/getCurrentWeather?city=${cityName}`,
           {
             method: "GET",
             credentials: "include",
@@ -277,7 +273,10 @@ function Header1() {
                   <p>Feels like:{cityInfo.feels}°C</p>
                   <p>Speed: {cityInfo.speed}km/h</p>
                 </div>
-                <button className="Main_btn" onClick={toggleContent}>
+                <button
+                  className="Main_btn"
+                  onClick={() => toggleContent(cityInfo.city)}
+                >
                   .!.
                 </button>
               </div>
