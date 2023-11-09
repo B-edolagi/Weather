@@ -173,22 +173,22 @@ function Header1() {
       }
     }
   };
-  useEffect(() => {
-    getToken().then((token) => {
-      if (token) {
-        setToken(token);
-        console.log("Token set:", token);
-      }
-    });
-  }, []);
   const toggleContent = () => {
+    useEffect(() => {
+      getToken().then((token) => {
+        if (token) {
+          setToken(token);
+          console.log("Token set:", token);
+        }
+      });
+    }, []);
     const l = {
       cityName: String,
     };
     setShowContent(!showContent); // Toggle the content visibility
     console.log("Token before request:", token);
     if (!token) {
-      // Handle the case where the token is missing or empty
+      console.log("lox");
       return;
     }
 
