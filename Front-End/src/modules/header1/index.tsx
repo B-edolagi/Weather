@@ -173,8 +173,9 @@ function Header1() {
       }
     }
   };
-  const toggleContent = () => {
-    getToken().then((token) => {
+  const toggleContent = async () => {
+    try {
+      const token = await getToken();
       if (token) {
         setToken(token);
 
@@ -184,22 +185,32 @@ function Header1() {
 
         setShowContent(!showContent);
 
-        fetch(`http://localhost:8080/getCurrentWeather?city=${l.cityName}`, {
-          method: "GET",
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        })
-          .then((response) => {
-            // ... Your response handling code ...
-          })
-          .catch((error) => {
-            // Handle errors
-          });
+        const response = await fetch(
+          `http://localhost:8080/getCurrentWeather?city=${l.cityName}`,
+          {
+            method: "GET",
+            credentials: "include",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: ` Bearer ${token}`,
+            },
+          }
+        );
+
+        // Handle the response
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+
+        const data = await response.json();
+
+        // Process the data as needed
+      } else {
+        // Handle case where token is not available
       }
-    });
+    } catch (error) {
+      // Handle errors
+    }
   };
   return (
     <>
