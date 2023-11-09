@@ -277,7 +277,7 @@ function Header1() {
                 <button
                   className="Main_btn"
                   onClick={() => {
-                    return toggleContent;
+                    return { toggleContent };
                   }}
                 >
                   .!.
