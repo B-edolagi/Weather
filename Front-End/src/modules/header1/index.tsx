@@ -187,7 +187,8 @@ function Header1() {
       // Handle the case where the token is missing or empty
       return;
     }
-
+    sendRequestToServer(cityName); // Send the request with the city name
+    setShowContent(!showContent); // Toggle the content visibility
     const headers = {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
@@ -206,10 +207,6 @@ function Header1() {
       });
   };
 
-  const toggleContent = (cityName: string) => {
-    sendRequestToServer(cityName); // Send the request with the city name
-    setShowContent(!showContent); // Toggle the content visibility
-  };
   return (
     <>
       <header>
