@@ -39,7 +39,7 @@ function Header1() {
       setIsLoading(true);
       try {
         const response = await fetch(
-          `http://localhost:8080/getCurrentWeather?city=${inputCity}`,
+          `http://localhost:8080/getDailyWeather?city=${inputCity}`,
           {
             method: "GET",
             credentials: "include",
