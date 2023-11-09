@@ -4,8 +4,6 @@ import { getToken } from "../register/token"; // Путь к файлу api.ts
 import { useCity } from "../../components/CityContext";
 import SectionMain from "../section_main/section_main";
 import SectionSecond from "../section_second/section_second";
-import Section_Time from "../section_main/section_time/Section_Time";
-import Section_Today from "../section_main/section_today/Section_Today";
 
 function Header1() {
   const [showContent, setShowContent] = useState(false); // State variable to control content visibility
@@ -182,7 +180,7 @@ function Header1() {
     setShowContent(!showContent); // Toggle the content visibility
     console.log("Token before request:", token);
 
-    fetch(`http://localhost:8080/getCurrentWeather?city=${l.cityName}`, {
+    fetch(`http://localhost:8080/getCurrentWeather?city=${city}`, {
       method: "GET",
       credentials: "include",
       headers: {
@@ -233,8 +231,7 @@ function Header1() {
       </header>
       {showContent ? (
         <>
-          <Section_Time />
-          <Section_Today />
+          <SectionMain /> {/* Display SectionMain component */}
           <SectionSecond /> {/* Display SectionToday component */}
         </>
       ) : (
