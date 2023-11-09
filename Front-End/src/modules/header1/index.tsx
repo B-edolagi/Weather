@@ -209,6 +209,10 @@ function Header1() {
   const toggleContent = () => {
     setShowContent(!showContent); // Toggle the content visibility
   };
+  const lox = () => {
+    toggleContent;
+    sendRequestToServer;
+  };
   return (
     <>
       <header>
@@ -274,12 +278,7 @@ function Header1() {
                   <p>Feels like:{cityInfo.feels}°C</p>
                   <p>Speed: {cityInfo.speed}km/h</p>
                 </div>
-                <button
-                  className="Main_btn"
-                  onClick={() => {
-                    return { toggleContent };
-                  }}
-                >
+                <button className="Main_btn" onClick={lox}>
                   .!.
                 </button>
               </div>
