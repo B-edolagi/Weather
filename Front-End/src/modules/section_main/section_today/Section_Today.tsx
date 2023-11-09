@@ -3,6 +3,13 @@ import { getToken } from "../../register/token"; // Путь к файлу api.t
 import { useCity } from "../../../components/CityContext";
 function Today() {
   const [token, setToken] = useState<string | null>("");
+  useEffect(() => {
+    getToken().then((token) => {
+      if (token) {
+        setToken(token);
+      }
+    });
+  }, []);
   const [temperature, setTemperature] = useState(null);
   const [feel, setFeel] = useState(null);
   const [pressure, setPressure] = useState(null);
@@ -20,13 +27,8 @@ function Today() {
   const { city } = useCity();
   // Ваш fetch запрос
   useEffect(() => {
-    getToken().then((token) => {
-      if (token) {
-        setToken(token);
-      }
-    });
     console.log("город" + city); // Добавьте эту строку для проверки, меняется ли 'city'
-    console.log({ token });
+    console.log(token);
     if (city) {
       fetch(`http://localhost:8080/getCurrentWeather?city=${city}`, {
         method: "GET",

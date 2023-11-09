@@ -177,28 +177,29 @@ function Header1() {
     getToken().then((token) => {
       if (token) {
         setToken(token);
+
+        const l = {
+          cityName: String,
+        };
+
+        setShowContent(!showContent);
+
+        fetch(`http://localhost:8080/getCurrentWeather?city=${l.cityName}`, {
+          method: "GET",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        })
+          .then((response) => {
+            // ... Your response handling code ...
+          })
+          .catch((error) => {
+            // Handle errors
+          });
       }
     });
-    const l = {
-      cityName: String,
-    };
-    setShowContent(!showContent); // Toggle the content visibility
-    console.log("Token before request:", token);
-
-    fetch(`http://localhost:8080/getCurrentWeather?city=${l.cityName}`, {
-      method: "GET",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((response) => {
-        // ... Your response handling code ...
-      })
-      .catch((error) => {
-        // Handle errors
-      });
   };
   return (
     <>
