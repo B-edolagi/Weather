@@ -27,9 +27,9 @@ function Today() {
   const { city } = useCity();
   // Ваш fetch запрос
   useEffect(() => {
-    console.log("город" + city); // Добавьте эту строку для проверки, меняется ли 'city'
-    console.log(token);
-    if (city) {
+    console.log("город" + city);
+    console.log(token); // Move the console.log inside this useEffect
+    if (city && token !== "") {
       fetch(`http://localhost:8080/getCurrentWeather?city=${city}`, {
         method: "GET",
         credentials: "include",
@@ -78,7 +78,7 @@ function Today() {
           // Дополнительная обработка ошибок
         });
     }
-  }, [city]);
+  }, [city, token]);
   return (
     <div className="Today_block" id="TodaySection">
       <div className="Today_block_tmp">
