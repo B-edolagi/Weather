@@ -207,6 +207,39 @@ function Header1() {
     } catch (error) {
       // Handle errors
     }
+    try {
+      const token = await getToken();
+      if (token) {
+        setToken(token);
+
+        setShowContent(!showContent);
+        console.log(`lox = ${token}`);
+        const response = await fetch(
+          `http://localhost:8080/getDailyWeather?city=${cityName}`,
+          {
+            method: "GET",
+            credentials: "include",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: ` Bearer ${token}`,
+            },
+          }
+        );
+
+        // Handle the response
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+
+        const data = await response.json();
+
+        // Process the data as needed
+      } else {
+        // Handle case where token is not available
+      }
+    } catch (error) {
+      // Handle errors
+    }
   };
   return (
     <>
