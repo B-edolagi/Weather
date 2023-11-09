@@ -179,10 +179,6 @@ function Header1() {
     };
     setShowContent(!showContent); // Toggle the content visibility
     console.log("Token before request:", token);
-    if (!token) {
-      console.log("lox");
-      return;
-    }
 
     const headers = {
       "Content-Type": "application/json",
