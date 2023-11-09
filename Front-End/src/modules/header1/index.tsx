@@ -277,9 +277,7 @@ function Header1() {
                 </div>
                 <button
                   className="Main_btn"
-                  onClick={() => {
-                    return sendRequestToServer;
-                  }}
+                  onClick={() => sendRequestToServer}
                 >
                   .!.
                 </button>
