@@ -45,9 +45,7 @@ function Today() {
           return response.json();
         })
         .then((data) => {
-          console.log(data);
           const temp = data.main.temp;
-          console.log(temp);
           const fls = data.main.feels_like;
           const prsr = data.main.pressure;
           const hmdt = data.main.humidity;
