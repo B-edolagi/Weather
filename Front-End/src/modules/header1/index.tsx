@@ -178,7 +178,6 @@ function Header1() {
       const token = await getToken();
       if (token) {
         setToken(token);
-
         setShowContent(!showContent);
         console.log(`lox = ${token}`);
         const response = await fetch(
@@ -273,10 +272,7 @@ function Header1() {
                   <p>Feels like:{cityInfo.feels}°C</p>
                   <p>Speed: {cityInfo.speed}km/h</p>
                 </div>
-                <button
-                  className="Main_btn"
-                  onClick={() => toggleContent(cityInfo.city)}
-                >
+                <button className="Main_btn" onClick={() => toggleContent}>
                   .!.
                 </button>
               </div>
